@@ -1,0 +1,73 @@
+.template-selector {
+  min-height: 100vh;
+  background: #f8f9fa;
+  padding: 60px 24px;
+  font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+}
+
+.template-selector__header {
+  text-align: center;
+  margin-bottom: 48px;
+}
+
+.template-selector__title {
+  font-size: 36px;
+  font-weight: 700;
+  color: #1a1a2e;
+  margin: 0 0 12px;
+}
+
+.template-selector__subtitle {
+  font-size: 18px;
+  color: #6c757d;
+  margin: 0;
+}
+
+.template-selector__grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+  gap: 32px;
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.template-card {
+  background: #ffffff;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+  cursor: pointer;
+  transition: transform 0.2s, box-shadow 0.2s;
+  border: 2px solid transparent;
+}
+
+.template-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+  border-color: #4361ee;
+}
+
+.template-card__preview {
+  height: 200px;
+  overflow: hidden;
+  position: relative;
+  border-bottom: 1px solid #e9ecef;
+}
+
+.template-card__body {
+  padding: 20px;
+}
+
+.template-card__name {
+  font-size: 20px;
+  font-weight: 600;
+  color: #1a1a2e;
+  margin: 0 0 8px;
+}
+
+.template-card__desc {
+  font-size: 14px;
+  color: #6c757d;
+  margin: 0;
+  line-height: 1.5;
+}

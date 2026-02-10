@@ -1,0 +1,40 @@
+.page-preview {
+  margin: 0 auto;
+  min-height: 400px;
+  box-shadow: 0 2px 16px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  padding: 48px;
+  box-sizing: border-box;
+  transition: background-color 0.2s;
+}
+
+.page-preview--two-column {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 32px;
+  align-items: center;
+}
+
+.page-preview__element {
+  cursor: pointer;
+  border: 2px solid transparent;
+  border-radius: 4px;
+  padding: 4px;
+  transition:
+    border-color 0.15s,
+    box-shadow 0.15s;
+}
+
+.page-preview__element:hover {
+  border-color: rgba(67, 97, 238, 0.4);
+}
+
+.page-preview__element--selected {
+  border-color: #4361ee;
+  box-shadow: 0 0 0 3px rgba(67, 97, 238, 0.15);
+}
+
+.page-preview__element img {
+  display: block;
+  border-radius: 6px;
+}

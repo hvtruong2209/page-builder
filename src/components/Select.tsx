@@ -1,0 +1,32 @@
+interface Option<T extends string> {
+  label: string;
+  value: T;
+}
+
+interface CommonSelectProps<T extends string> {
+  value: T;
+  options: Option<T>[];
+  onChange: (value: T) => void;
+  className?: string;
+}
+
+export function CommonSelect<T extends string>({
+  value,
+  options,
+  onChange,
+  className,
+}: CommonSelectProps<T>) {
+  return (
+    <select
+      className={className}
+      value={value}
+      onChange={(e) => onChange(e.target.value as T)}
+    >
+      {options.map((opt) => (
+        <option key={opt.value} value={opt.value}>
+          {opt.label}
+        </option>
+      ))}
+    </select>
+  );
+}
