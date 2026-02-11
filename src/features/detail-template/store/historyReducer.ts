@@ -37,7 +37,7 @@ export function historyReducer(state: History<Template>, action: BuilderAction):
   // run builder reducer
   const newPresent = builderReducer(state.present, action);
 
-  // IMPORTANT: nếu state không đổi → không snapshot
+  // IMPORTANT: do not add to history if nothing changed
   if (newPresent === state.present) return state;
 
   const past = [...state.past, state.present];

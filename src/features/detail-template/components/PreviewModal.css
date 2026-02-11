@@ -1,0 +1,61 @@
+.preview-modal__overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  background: #e9ecef;
+  display: flex;
+  flex-direction: column;
+  overflow: auto;
+}
+
+.preview-modal__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 24px;
+  background: #1a1a2e;
+  color: #ffffff;
+  flex-shrink: 0;
+}
+
+.preview-modal__title {
+  font-size: 15px;
+  font-weight: 600;
+}
+
+.preview-modal__close-btn {
+  border: none;
+  background: rgba(255, 255, 255, 0.12);
+  color: #ffffff;
+  padding: 8px 16px;
+  border-radius: 6px;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background 0.15s;
+}
+
+.preview-modal__close-btn:hover {
+  background: rgba(255, 255, 255, 0.22);
+}
+
+.preview-modal__body {
+  flex: 1;
+  padding: 48px 24px;
+  display: flex;
+  justify-content: center;
+}
+
+.preview-modal__body .page-preview {
+  cursor: default;
+}
+
+.preview-modal__body .page-preview__element {
+  cursor: default;
+  border-color: transparent !important;
+  box-shadow: none !important;
+}
+
+.preview-modal__body .page-preview__element:hover {
+  border-color: transparent !important;
+}

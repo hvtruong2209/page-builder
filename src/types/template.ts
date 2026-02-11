@@ -7,10 +7,26 @@ export interface BaseElement {
   type: ElementType;
 }
 
+export type FontWeight =
+  | "normal"
+  | "bold"
+  | "100"
+  | "200"
+  | "300"
+  | "400"
+  | "500"
+  | "600"
+  | "700"
+  | "800"
+  | "900";
+export type FontStyle = "normal" | "italic";
+
 export interface HeadingElement extends BaseElement {
   type: "heading";
   text: string;
   fontSize: number;
+  fontWeight: FontWeight;
+  fontStyle: FontStyle;
   color: string;
   alignment: TextAlignment;
 }
@@ -19,6 +35,8 @@ export interface ParagraphElement extends BaseElement {
   type: "paragraph";
   text: string;
   fontSize: number;
+  fontWeight: FontWeight;
+  fontStyle: FontStyle;
   color: string;
   alignment: TextAlignment;
 }

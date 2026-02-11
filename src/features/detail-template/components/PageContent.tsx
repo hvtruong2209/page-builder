@@ -4,7 +4,7 @@ import { useSelectedElement } from "../hooks/useBuilderUIProvider";
 import "./PageContent.css";
 import React, { useRef } from "react";
 
-const PageContent = () => {
+const PageContent = ({ isPreview }: { isPreview?: boolean }) => {
   const dispatch = useBuilderDispatch();
   const template = useTemplate();
   const { selectedElementId, setSelectedElementId, draft } = useSelectedElement();
@@ -41,7 +41,8 @@ const PageContent = () => {
       e.currentTarget.blur();
     }
   };
-  const pageSettingsDisplay = draft && draft.kind === "page" ? { ...pageSettings, ...draft.changes } : pageSettings;
+  const pageSettingsDisplay =
+    draft && draft.kind === "page" ? { ...pageSettings, ...draft.changes } : pageSettings;
 
   return (
     <div className="builder__preview-pane" onClick={() => setSelectedElementId(null)}>
@@ -55,7 +56,9 @@ const PageContent = () => {
         {elements.map((el) => {
           const isSelected = el.id === selectedElementId;
           const displayEl: TemplateElement =
-            draft && draft.kind === "element" && draft.id === el.id ? { ...el, ...draft.changes } : el;
+            draft && draft.kind === "element" && draft.id === el.id
+              ? { ...el, ...draft.changes }
+              : el;
 
           const cls = `page-preview__element ${isSelected ? "page-preview__element--selected" : ""}`;
 
@@ -63,8 +66,8 @@ const PageContent = () => {
             return (
               <div key={displayEl.id} className={cls} onClick={(e) => handleClick(e, displayEl.id)}>
                 <h1
-                  contentEditable
-                  suppressContentEditableWarning
+                  contentEditable={!isPreview}
+                  suppressContentEditableWarning={!isPreview}
                   onBlur={(e) => handleBlur(displayEl, e)}
                   onKeyDown={handleKeyDown}
                   onFocus={(e) => {
@@ -90,8 +93,8 @@ const PageContent = () => {
             return (
               <div key={displayEl.id} className={cls} onClick={(e) => handleClick(e, displayEl.id)}>
                 <p
-                  contentEditable
-                  suppressContentEditableWarning
+                  contentEditable={!isPreview}
+                  suppressContentEditableWarning={!isPreview}
                   onBlur={(e) => handleBlur(displayEl, e)}
                   onKeyDown={handleKeyDown}
                   onFocus={(e) => {
@@ -117,15 +120,20 @@ const PageContent = () => {
             return (
               <div
                 key={displayEl.id}
-                className={cls}
-                onClick={(e) => handleClick(e, displayEl.id)}
+                className="page-preview__element--image-wrap"
                 style={{ textAlign: displayEl.alignment }}
+                onClick={(e) => handleClick(e, displayEl.id)}
               >
-                <img
-                  src={displayEl.src}
-                  alt={displayEl.alt}
-                  style={{ width: `${displayEl.width}%`, maxWidth: "100%" }}
-                />
+                <div
+                  className={`page-preview__image-inner ${isSelected ? "page-preview__element--selected" : ""}`}
+                  style={{ width: `${displayEl.width}%` }}
+                >
+                  <img
+                    src={displayEl.src}
+                    alt={displayEl.alt}
+                    style={{ width: "100%", display: "block" }}
+                  />
+                </div>
               </div>
             );
           }

@@ -1,28 +1,22 @@
 import "./DetailBuilderLayout.css";
 import ActionTopBar from "./components/ActionTopBar";
 import PageContent from "./components/PageContent";
+import { PreviewModal } from "./components/PreviewModal";
 import SettingsPanel from "./components/SettingsPanel";
+import { useSelectedElement } from "./hooks/useBuilderUIProvider";
 
 const DetailBuilderLayout = () => {
-  // const handlePageSettingsChange = (pageSettings: Template["pageSettings"]) => {};
+  const { showPreview, setShowPreview } = useSelectedElement();
 
   return (
     <div className="builder">
       <ActionTopBar></ActionTopBar>
       <div className="builder__body">
         <PageContent />
-
-        <div className="builder__settings-pane">
-          <SettingsPanel />
-        </div>
+        <SettingsPanel />
       </div>
 
-      {/* {showPreview && (
-        <PreviewModal
-          template={template}
-          onClose={() => setShowPreview(false)}
-        />
-      )} */}
+      {showPreview && <PreviewModal onClose={() => setShowPreview(false)} />}
     </div>
   );
 };

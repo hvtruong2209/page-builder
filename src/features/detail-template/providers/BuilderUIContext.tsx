@@ -6,12 +6,10 @@ import type { Draft } from "../../../types";
 
 export const BuilderUIProvider = ({ children }: { children: React.ReactNode }) => {
   const [selectedElementId, setSelectedElementId] = useState<string | null>(null);
+  const [showPreview, setShowPreview] = useState(false);
   const [draft, setDraft] = useState<Draft | null>(null);
   const dispatch = useBuilderDispatch();
-  /**
-   ⭐ BEGIN INTERACTION
-   gọi khi user bắt đầu drag / resize / typing
-   */
+
   const beginDraft = useCallback((id: string) => {
     setDraft({
       kind: "element",
@@ -20,10 +18,7 @@ export const BuilderUIProvider = ({ children }: { children: React.ReactNode }) =
     });
   }, []);
 
-  /**
-   ⭐ UPDATE REALTIME
-   chỉ update UI — không vào history
-   */
+  // only update the draft state, do not commit to reducer yet
   const updateDraft = useCallback((changes: Partial<TemplateElement>) => {
     setDraft((prev: Draft | null) => {
       if (!prev || prev.kind !== "element") return prev;
@@ -39,10 +34,6 @@ export const BuilderUIProvider = ({ children }: { children: React.ReactNode }) =
     });
   }, []);
 
-  /**
-   ⭐ COMMIT (QUAN TRỌNG NHẤT)
-   ghi vào reducer → undo được
-   */
   const commitDraft = useCallback(() => {
     if (!draft) return;
 
@@ -114,6 +105,8 @@ export const BuilderUIProvider = ({ children }: { children: React.ReactNode }) =
       value={{
         selectedElementId,
         setSelectedElementId,
+        showPreview,
+        setShowPreview,
         draft,
         beginDraft,
         updateDraft,

@@ -1,13 +1,16 @@
 import { Link } from "react-router-dom";
 import { useHistoryControls, useTemplate } from "../hooks/useBuilderProvider";
+import { exportToHtml } from "../services/exportToHtml";
+import { useSelectedElement } from "../hooks/useBuilderUIProvider";
+import CommonButton from "../../../components/Button";
 
 const ActionTopBar = () => {
-  const template = useTemplate();
   const { undo, redo, canUndo, canRedo } = useHistoryControls();
-  //   const [showPreview, setShowPreview] = useState(false);
+  const template = useTemplate();
+  const { setShowPreview } = useSelectedElement();
 
   const handleExport = () => {
-    // exportToHtml(template);
+    exportToHtml(template);
   };
 
   return (
@@ -19,21 +22,26 @@ const ActionTopBar = () => {
         <span className="builder__template-name">{template?.name}</span>
       </div>
       <div className="builder__topbar-actions">
-        <button className="builder__action-btn" onClick={undo} disabled={!canUndo} title="Undo">
-          ↩ Undo
-        </button>
-        <button className="builder__action-btn" onClick={redo} disabled={!canRedo} title="Redo">
-          Redo ↪
-        </button>
-        {/* <button
+        <CommonButton
+          className="builder__action-btn"
+          onClick={undo}
+          disabled={!canUndo}
+          title="Undo"
+          text="↩ Undo"
+        />
+        <CommonButton
+          className="builder__action-btn"
+          onClick={redo}
+          disabled={!canRedo}
+          title="Redo"
+          text="Redo ↪"
+        />
+        <CommonButton
           className="builder__action-btn builder__action-btn--preview"
           onClick={() => setShowPreview(true)}
-        >
-          👁 Preview
-        </button> */}
-        <button className="builder__export-btn" onClick={handleExport}>
-          Export HTML
-        </button>
+          text="👁 Preview"
+        />
+        <CommonButton className="builder__export-btn" onClick={handleExport} text="Export HTML" />
       </div>
     </div>
   );

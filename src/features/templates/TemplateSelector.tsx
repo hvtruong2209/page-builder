@@ -8,7 +8,9 @@ const TemplateSelector = () => {
     <div className="template-selector">
       <div className="template-selector__header">
         <h1 className="template-selector__title">Choose a Template</h1>
-        <p className="template-selector__subtitle">Pick a starting point and customize it to your liking.</p>
+        <p className="template-selector__subtitle">
+          Pick a starting point and customize it to your liking.
+        </p>
       </div>
       <div className="template-selector__grid">
         {configTemplates.map((t) => (

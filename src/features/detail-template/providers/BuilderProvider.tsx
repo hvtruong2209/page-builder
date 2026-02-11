@@ -1,9 +1,19 @@
 import React from "react";
 import { useBuilder } from "../hooks/useHistory";
 import type { Template } from "../../../types/template";
-import { BuilderStateContext, BuilderDispatchContext, BuilderHistoryContext } from "../hooks/useBuilderProvider";
+import {
+  BuilderStateContext,
+  BuilderDispatchContext,
+  BuilderHistoryContext,
+} from "../hooks/useBuilderProvider";
 
-export const BuilderProvider = ({ initial, children }: { initial: Template; children: React.ReactNode }) => {
+export const BuilderProvider = ({
+  initial,
+  children,
+}: {
+  initial: Template;
+  children: React.ReactNode;
+}) => {
   const builder = useBuilder(initial);
 
   return (

@@ -6,6 +6,9 @@ export const BuilderUIContext = createContext<{
   selectedElementId: string | null;
   setSelectedElementId: (id: string | null) => void;
 
+  showPreview: boolean;
+  setShowPreview: (show: boolean) => void;
+
   draft: Draft | null;
   beginDraft: (id: string) => void;
   updateDraft: (changes: Partial<TemplateElement>) => void;

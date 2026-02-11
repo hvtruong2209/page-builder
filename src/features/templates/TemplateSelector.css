@@ -2,7 +2,11 @@
   min-height: 100vh;
   background: #f8f9fa;
   padding: 60px 24px;
-  font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+  font-family:
+    "Segoe UI",
+    system-ui,
+    -apple-system,
+    sans-serif;
 }
 
 .template-selector__header {
@@ -37,7 +41,9 @@
   overflow: hidden;
   box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
   cursor: pointer;
-  transition: transform 0.2s, box-shadow 0.2s;
+  transition:
+    transform 0.2s,
+    box-shadow 0.2s;
   border: 2px solid transparent;
 }
 

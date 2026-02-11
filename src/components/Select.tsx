@@ -8,6 +8,7 @@ interface CommonSelectProps<T extends string> {
   options: Option<T>[];
   onChange: (value: T) => void;
   className?: string;
+  label?: string;
 }
 
 export function CommonSelect<T extends string>({
@@ -15,18 +16,18 @@ export function CommonSelect<T extends string>({
   options,
   onChange,
   className,
+  label,
 }: CommonSelectProps<T>) {
   return (
-    <select
-      className={className}
-      value={value}
-      onChange={(e) => onChange(e.target.value as T)}
-    >
-      {options.map((opt) => (
-        <option key={opt.value} value={opt.value}>
-          {opt.label}
-        </option>
-      ))}
-    </select>
+    <>
+      {!!label && <label className="settings-panel__label">{label}</label>}
+      <select className={className} value={value} onChange={(e) => onChange(e.target.value as T)}>
+        {options.map((opt) => (
+          <option key={opt.value} value={opt.value}>
+            {opt.label}
+          </option>
+        ))}
+      </select>
+    </>
   );
 }

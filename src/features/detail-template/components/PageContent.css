@@ -25,7 +25,23 @@
     box-shadow 0.15s;
 }
 
-.page-preview__element:hover {
+.page-preview__element--image-wrap {
+  text-align: center;
+}
+
+.page-preview__element--image-wrap .page-preview__image-inner {
+  display: inline-block;
+  border: 2px solid transparent;
+  border-radius: 4px;
+  padding: 4px;
+  transition:
+    border-color 0.15s,
+    box-shadow 0.15s;
+  cursor: pointer;
+}
+
+.page-preview__element:hover,
+.page-preview__image-inner:hover {
   border-color: rgba(67, 97, 238, 0.4);
 }
 
@@ -34,7 +50,7 @@
   box-shadow: 0 0 0 3px rgba(67, 97, 238, 0.15);
 }
 
-.page-preview__element img {
+.page-preview__image-inner img {
   display: block;
   border-radius: 6px;
 }
