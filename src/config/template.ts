@@ -1,4 +1,4 @@
-import type { Template } from "../types/template";
+import type { Template } from "../types/element";
 
 export const configTemplates: Template[] = [
   {
@@ -33,12 +33,62 @@ export const configTemplates: Template[] = [
         alignment: "center",
       },
       {
-        id: "image-1",
-        type: "image",
-        src: "https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=800&q=80",
-        alt: "Hero image",
-        width: 100,
-        alignment: "center",
+        id: "section-1",
+        type: "section",
+        reversed: false,
+        gap: 32,
+        backgroundColor: "#f8f9fa",
+        sectionPadding: 32,
+        borderRadius: 12,
+        children: [
+          {
+            id: "section-1-img",
+            type: "image",
+            src: "https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=800&q=80",
+            alt: "Feature image",
+            width: 100,
+            alignment: "center",
+          },
+          {
+            id: "section-1-text-group",
+            type: "heading",
+            text: "Built for Speed",
+            fontSize: 28,
+            fontWeight: "bold",
+            fontStyle: "normal",
+            color: "#1a1a2e",
+            alignment: "left",
+          },
+        ],
+      },
+      {
+        id: "section-2",
+        type: "section",
+        reversed: true,
+        gap: 32,
+        backgroundColor: "#ffffff",
+        sectionPadding: 32,
+        borderRadius: 12,
+        children: [
+          {
+            id: "section-2-img",
+            type: "image",
+            src: "https://images.unsplash.com/photo-1488590528505-98d2b5aba04b?w=600&q=80",
+            alt: "Design image",
+            width: 100,
+            alignment: "center",
+          },
+          {
+            id: "section-2-text",
+            type: "paragraph",
+            text: "Our platform provides everything you need to create stunning websites with zero coding required. Drag, drop, and publish in minutes.",
+            fontSize: 16,
+            fontWeight: "normal",
+            fontStyle: "normal",
+            color: "#555555",
+            alignment: "left",
+          },
+        ],
       },
     ],
   },

@@ -1,25 +1,11 @@
-export type ElementType = "heading" | "paragraph" | "image";
-
-export type TextAlignment = "left" | "center" | "right";
+import type { Spacing, FontWeight, FontStyle, TextAlignment, ElementType } from "./styles";
 
 export interface BaseElement {
   id: string;
   type: ElementType;
+  margin?: Spacing;
+  padding?: Spacing;
 }
-
-export type FontWeight =
-  | "normal"
-  | "bold"
-  | "100"
-  | "200"
-  | "300"
-  | "400"
-  | "500"
-  | "600"
-  | "700"
-  | "800"
-  | "900";
-export type FontStyle = "normal" | "italic";
 
 export interface HeadingElement extends BaseElement {
   type: "heading";
@@ -49,7 +35,27 @@ export interface ImageElement extends BaseElement {
   alignment: TextAlignment;
 }
 
-export type TemplateElement = HeadingElement | ParagraphElement | ImageElement;
+export interface SectionElement extends BaseElement {
+  type: "section";
+  children: TemplateElement[];
+  reversed: boolean;
+  gap: number;
+  backgroundColor: string;
+  sectionPadding: number;
+  borderRadius: number;
+}
+
+export type TemplateElement = HeadingElement | ParagraphElement | ImageElement | SectionElement;
+export type Draft =
+  | {
+      kind: "element";
+      id: string;
+      changes: Partial<Omit<TemplateElement, "id" | "type">>;
+    }
+  | {
+      kind: "page";
+      changes: Partial<PageSettings>;
+    };
 
 export interface PageSettings {
   backgroundColor: string;

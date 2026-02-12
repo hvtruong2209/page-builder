@@ -1,10 +1,10 @@
-import CommonButton from "../../../components/Button";
-import { useTemplate } from "../hooks/useBuilderProvider";
+import { CommonButton } from "../../../components/Button";
+import { useBuilderState } from "../hooks/useBuilderState";
 import PageContent from "./PageContent";
 import "./PreviewModal.css";
 
-export function PreviewModal({ onClose }: { onClose: () => void }) {
-  const template = useTemplate();
+export const PreviewModal = ({ onClose }: { onClose: () => void }) => {
+  const template = useBuilderState();
 
   return (
     <div className="preview-modal__overlay">
@@ -17,4 +17,4 @@ export function PreviewModal({ onClose }: { onClose: () => void }) {
       </div>
     </div>
   );
-}
+};

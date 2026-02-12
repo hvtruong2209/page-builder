@@ -23,7 +23,7 @@ export const TextField = ({
 
   if (type === "textarea") {
     return (
-      <>
+      <div className="settings-panel__group">
         {label && <label className="settings-panel__label">{label}</label>}
         <textarea
           className={`settings-panel__textarea ${className}`}
@@ -32,12 +32,12 @@ export const TextField = ({
           placeholder={placeholder}
           disabled={disabled}
         />
-      </>
+      </div>
     );
   }
 
   return (
-    <>
+    <div className="settings-panel__group">
       {label && <label className="settings-panel__label">Alt Text</label>}
       <input
         type="text"
@@ -47,6 +47,6 @@ export const TextField = ({
         placeholder={placeholder}
         disabled={disabled}
       />
-    </>
+    </div>
   );
 };

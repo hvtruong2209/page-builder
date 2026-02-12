@@ -54,3 +54,29 @@
   display: block;
   border-radius: 6px;
 }
+
+/* Section element */
+.page-preview__section {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: center;
+  cursor: pointer;
+  border: 2px solid transparent;
+  border-radius: 8px;
+  transition:
+    border-color 0.15s,
+    box-shadow 0.15s;
+}
+
+.page-preview__section:hover {
+  border-color: rgba(67, 97, 238, 0.3);
+}
+
+.page-preview__section--selected {
+  border-color: #4361ee;
+  box-shadow: 0 0 0 3px rgba(67, 97, 238, 0.15);
+}
+
+.page-preview__section-child {
+  min-width: 0;
+}

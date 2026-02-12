@@ -1,18 +1,28 @@
+import { CommonButton } from "../../../components/Button";
 import { CommonColorInput } from "../../../components/ColorInput";
 import { CommonSelect } from "../../../components/Select";
 import { CommonSlider } from "../../../components/Slider";
+import { SpacingControls } from "../../../components/SpacingControls";
 import { TextField } from "../../../components/TextField";
-import { ALIGNMENT_OPTIONS } from "../../../config/variable";
-import type { HeadingElement, ParagraphElement, ImageElement } from "../../../types/template";
-import { useBuilderDispatch, useTemplate } from "../hooks/useBuilderProvider";
-import { useSelectedElement } from "../hooks/useBuilderUIProvider";
+import { ALIGNMENT_OPTIONS, DEFAULT_SPACING } from "../../../config/variable";
+import {
+  type HeadingElement,
+  type ParagraphElement,
+  type ImageElement,
+  type SectionElement,
+} from "../../../types/element";
+import { useBuilderDispatch } from "../hooks/useBuilderDispatch";
+import { useBuilderState } from "../hooks/useBuilderState";
+import { useBuilderUI } from "../hooks/useBuilderUI";
+import { findElement } from "../services/elementService";
+
 import "./SettingsPanel.css";
 
 const SettingsPanel = () => {
-  const { selectedElementId } = useSelectedElement();
-  const template = useTemplate();
+  const template = useBuilderState();
   const dispatch = useBuilderDispatch();
   const {
+    selectedElementId,
     draft,
     beginDraft,
     updateDraft,
@@ -20,12 +30,12 @@ const SettingsPanel = () => {
     beginPageDraft,
     updatePageDraft,
     commitPageDraft,
-  } = useSelectedElement();
+  } = useBuilderUI();
 
   const { pageSettings } = template;
 
   const selectedElement = selectedElementId
-    ? (template.elements.find((e) => e.id === selectedElementId) ?? null)
+    ? findElement(template.elements, selectedElementId)
     : null;
 
   const updatePageSetting = (key: keyof typeof pageSettings, value: string | number) => {
@@ -40,7 +50,7 @@ const SettingsPanel = () => {
 
   const updateElement = (
     id: string,
-    changes: Partial<HeadingElement | ParagraphElement | ImageElement>,
+    changes: Partial<HeadingElement | ParagraphElement | ImageElement | SectionElement>,
   ) => {
     dispatch({
       type: "UPDATE_ELEMENT",
@@ -71,20 +81,18 @@ const SettingsPanel = () => {
 
     return (
       <div>
-        <button
+        <CommonButton
           className="settings-panel__duplicate-btn"
           onClick={handleDuplicate}
           title="Duplicate Element"
-        >
-          ⧉
-        </button>
-        <button
+          text="⧉"
+        />
+        <CommonButton
           className="settings-panel__duplicate-btn"
           onClick={handleRemove}
           title="Remove Element"
-        >
-          🗑️
-        </button>
+          text="🗑️"
+        />
       </div>
     );
   };
@@ -96,27 +104,23 @@ const SettingsPanel = () => {
       <div className="builder__settings-pane">
         <div className="settings-panel">
           <h3 className="settings-panel__title">Page Settings</h3>
-          <div className="settings-panel__group">
-            <CommonColorInput
-              label="Background Color"
-              className="settings-panel__color-input"
-              value={pageSettings.backgroundColor}
-              onChange={(value: string) => updatePageSetting("backgroundColor", value)}
-            />
-          </div>
-          <div className="settings-panel__group">
-            <CommonSlider
-              label="Content Width"
-              className="settings-panel__range"
-              min={600}
-              max={1400}
-              value={pageSettingsDisplay.contentWidth}
-              onChange={(value) => updatePageDraft({ contentWidth: value })}
-              onChangeStart={() => beginPageDraft()}
-              onChangeEnd={() => commitPageDraft()}
-              amountText={`${pageSettingsDisplay.contentWidth}px`}
-            />
-          </div>
+          <CommonColorInput
+            label="Background Color"
+            className="settings-panel__color-input"
+            value={pageSettingsDisplay.backgroundColor}
+            onChange={(value: string) => updatePageSetting("backgroundColor", value)}
+          />
+          <CommonSlider
+            label="Content Width"
+            className="settings-panel__range"
+            min={600}
+            max={1400}
+            value={pageSettingsDisplay.contentWidth}
+            onChange={(value) => updatePageDraft({ contentWidth: value })}
+            onChangeStart={() => beginPageDraft()}
+            onChangeEnd={() => commitPageDraft()}
+            amountText={`${pageSettingsDisplay.contentWidth}px`}
+          />
         </div>
       </div>
     );
@@ -135,45 +139,43 @@ const SettingsPanel = () => {
             <h3 className="settings-panel__title">Heading Settings</h3>
             {duplicateButton()}
           </div>
-          <div className="settings-panel__group">
-            <TextField
-              label="Text"
-              type="textarea"
-              className="settings-panel__textarea"
-              value={el.text}
-              onChange={(value) => updateElement(el.id, { text: value })}
-            />
-          </div>
-          <div className="settings-panel__group">
-            <CommonSlider
-              label="Font Size"
-              className="settings-panel__range"
-              min={12}
-              max={72}
-              value={el.fontSize}
-              onChange={(value) => updateDraft({ fontSize: value })}
-              onChangeStart={() => beginDraft(el.id)}
-              onChangeEnd={() => commitDraft()}
-              amountText={`${el.fontSize}px`}
-            />
-          </div>
-          <div className="settings-panel__group">
-            <CommonColorInput
-              label="Color"
-              className="settings-panel__color-input"
-              value={el.color}
-              onChange={(value: string) => updateElement(el.id, { color: value })}
-            />
-          </div>
-          <div className="settings-panel__group">
-            <CommonSelect
-              label="Alignment"
-              className="settings-panel__select"
-              value={el.alignment}
-              onChange={(alignment) => updateElement(el.id, { alignment: alignment })}
-              options={ALIGNMENT_OPTIONS}
-            />
-          </div>
+          <TextField
+            label="Text"
+            type="textarea"
+            className="settings-panel__textarea"
+            value={el.text}
+            onChange={(value) => updateElement(el.id, { text: value })}
+          />
+          <CommonSlider
+            label="Font Size"
+            className="settings-panel__range"
+            min={12}
+            max={72}
+            value={el.fontSize}
+            onChange={(value) => updateDraft({ fontSize: value })}
+            onChangeStart={() => beginDraft(el.id)}
+            onChangeEnd={() => commitDraft()}
+            amountText={`${el.fontSize}px`}
+          />
+          <CommonColorInput
+            label="Color"
+            className="settings-panel__color-input"
+            value={el.color}
+            onChange={(value: string) => updateElement(el.id, { color: value })}
+          />
+          <CommonSelect
+            label="Alignment"
+            className="settings-panel__select"
+            value={el.alignment}
+            onChange={(alignment) => updateElement(el.id, { alignment: alignment })}
+            options={ALIGNMENT_OPTIONS}
+          />
+          <SpacingControls
+            margin={el.margin || DEFAULT_SPACING}
+            padding={el.padding || DEFAULT_SPACING}
+            onMarginChange={(margin) => updateElement(el.id, { margin })}
+            onPaddingChange={(padding) => updateElement(el.id, { padding })}
+          />
         </div>
       </div>
     );
@@ -191,45 +193,43 @@ const SettingsPanel = () => {
             <h3 className="settings-panel__title">Paragraph Settings</h3>
             {duplicateButton()}
           </div>
-          <div className="settings-panel__group">
-            <TextField
-              label="Text"
-              type="textarea"
-              className="settings-panel__textarea"
-              value={el.text}
-              onChange={(value) => updateElement(el.id, { text: value })}
-            />
-          </div>
-          <div className="settings-panel__group">
-            <CommonSlider
-              label="Font size"
-              className="settings-panel__range"
-              min={10}
-              max={36}
-              value={el.fontSize}
-              onChange={(value) => updateDraft({ fontSize: value })}
-              onChangeStart={() => beginDraft(el.id)}
-              onChangeEnd={() => commitDraft()}
-              amountText={`${el.fontSize}px`}
-            />
-          </div>
-          <div className="settings-panel__group">
-            <CommonColorInput
-              label="Color"
-              className="settings-panel__color-input"
-              value={el.color}
-              onChange={(value: string) => updateElement(el.id, { color: value })}
-            />
-          </div>
-          <div className="settings-panel__group">
-            <CommonSelect
-              label="Alignment"
-              className="settings-panel__select"
-              value={el.alignment}
-              onChange={(alignment) => updateElement(el.id, { alignment: alignment })}
-              options={ALIGNMENT_OPTIONS}
-            />
-          </div>
+          <TextField
+            label="Text"
+            type="textarea"
+            className="settings-panel__textarea"
+            value={el.text}
+            onChange={(value) => updateElement(el.id, { text: value })}
+          />
+          <CommonSlider
+            label="Font size"
+            className="settings-panel__range"
+            min={10}
+            max={36}
+            value={el.fontSize}
+            onChange={(value) => updateDraft({ fontSize: value })}
+            onChangeStart={() => beginDraft(el.id)}
+            onChangeEnd={() => commitDraft()}
+            amountText={`${el.fontSize}px`}
+          />
+          <CommonColorInput
+            label="Color"
+            className="settings-panel__color-input"
+            value={el.color}
+            onChange={(value: string) => updateElement(el.id, { color: value })}
+          />
+          <CommonSelect
+            label="Alignment"
+            className="settings-panel__select"
+            value={el.alignment}
+            onChange={(alignment) => updateElement(el.id, { alignment: alignment })}
+            options={ALIGNMENT_OPTIONS}
+          />
+          <SpacingControls
+            margin={el.margin || DEFAULT_SPACING}
+            padding={el.padding || DEFAULT_SPACING}
+            onMarginChange={(margin) => updateElement(el.id, { margin })}
+            onPaddingChange={(padding) => updateElement(el.id, { padding })}
+          />
         </div>
       </div>
     );
@@ -277,37 +277,93 @@ const SettingsPanel = () => {
               onChange={(value) => updateElement(el.id, { src: value })}
             />
           </div>
-          <div className="settings-panel__group">
-            <TextField
-              label="Alt Text"
-              type="text"
-              className="settings-panel__input"
-              value={el.alt}
-              onChange={(value) => updateElement(el.id, { alt: value })}
-            />
-          </div>
-          <div className="settings-panel__group">
-            <CommonSlider
-              label="Width (%)"
-              className="settings-panel__range"
-              min={10}
-              max={100}
-              value={el.width}
-              onChange={(value) => updateDraft({ width: value })}
-              onChangeStart={() => beginDraft(el.id)}
-              onChangeEnd={() => commitDraft()}
-              amountText={`${el.width}%`}
-            />
-          </div>
-          <div className="settings-panel__group">
-            <CommonSelect
-              label="Alignment"
-              className="settings-panel__select"
-              value={el.alignment}
-              onChange={(alignment) => updateElement(el.id, { alignment: alignment })}
-              options={ALIGNMENT_OPTIONS}
-            />
-          </div>
+          <TextField
+            label="Alt Text"
+            type="text"
+            className="settings-panel__input"
+            value={el.alt}
+            onChange={(value) => updateElement(el.id, { alt: value })}
+          />
+          <CommonSlider
+            label="Width (%)"
+            className="settings-panel__range"
+            min={10}
+            max={100}
+            value={el.width}
+            onChange={(value) => updateDraft({ width: value })}
+            onChangeStart={() => beginDraft(el.id)}
+            onChangeEnd={() => commitDraft()}
+            amountText={`${el.width}%`}
+          />
+          <CommonSelect
+            label="Alignment"
+            className="settings-panel__select"
+            value={el.alignment}
+            onChange={(alignment) => updateElement(el.id, { alignment: alignment })}
+            options={ALIGNMENT_OPTIONS}
+          />
+          <SpacingControls
+            margin={el.margin || DEFAULT_SPACING}
+            padding={el.padding || DEFAULT_SPACING}
+            onMarginChange={(margin) => updateElement(el.id, { margin })}
+            onPaddingChange={(padding) => updateElement(el.id, { padding })}
+          />
+        </div>
+      </div>
+    );
+  }
+
+  if (selectedElement.type === "section") {
+    const el = selectedElement as SectionElement;
+    return (
+      <div className="settings-panel">
+        <div className="settings-panel__header-row">
+          <h3 className="settings-panel__title">Section Settings</h3>
+          {duplicateButton()}
+        </div>
+        <div className="settings-panel__group">
+          <button
+            className="settings-panel__swap-btn"
+            // onClick={() => onElementChange({ ...el, reversed: !el.reversed })}
+          >
+            ⇄ Swap Left / Right
+          </button>
+        </div>
+        <CommonSlider
+          label="Gap"
+          className="settings-panel__range"
+          min={0}
+          max={64}
+          value={el.gap}
+          onChange={(value) => updateElement(el.id, { gap: value })}
+          amountText={`${el.gap}px`}
+        />
+        <CommonSlider
+          label="Border Radius"
+          className="settings-panel__range"
+          min={0}
+          max={32}
+          value={el.borderRadius}
+          onChange={(value) => updateElement(el.id, { borderRadius: value })}
+          amountText={`${el.borderRadius}px`}
+        />
+        <CommonColorInput
+          label="Background Color"
+          className="settings-panel__color-input"
+          value={el.backgroundColor}
+          onChange={(value: string) => updateElement(el.id, { backgroundColor: value })}
+        />
+        <SpacingControls
+          margin={el.margin || DEFAULT_SPACING}
+          padding={el.padding || DEFAULT_SPACING}
+          onMarginChange={(margin) => updateElement(el.id, { margin })}
+          onPaddingChange={(padding) => updateElement(el.id, { padding })}
+        />
+        <div className="settings-panel__section-children">
+          <label className="settings-panel__label">Children ({el.children.length} elements)</label>
+          <p className="settings-panel__hint">
+            Click on child elements in the preview to edit them individually.
+          </p>
         </div>
       </div>
     );

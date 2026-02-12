@@ -1,11 +1,15 @@
 import React from "react";
-import { useBuilder } from "../hooks/useHistory";
-import type { Template } from "../../../types/template";
+import type { Template } from "../../../types/element";
+
+import { useBuilderStore } from "../store/useBuilderStore";
+import { BuilderUIContext } from "../contexts/BuilderUIContext";
+import { useBuilderUIStore } from "../store/useBuilderUIStore";
+import { useBridgeAction } from "../hooks/useBridgeAction";
 import {
   BuilderStateContext,
   BuilderDispatchContext,
   BuilderHistoryContext,
-} from "../hooks/useBuilderProvider";
+} from "../contexts/BuilderContext";
 
 export const BuilderProvider = ({
   initial,
@@ -14,7 +18,9 @@ export const BuilderProvider = ({
   initial: Template;
   children: React.ReactNode;
 }) => {
-  const builder = useBuilder(initial);
+  const builder = useBuilderStore(initial);
+  const builderUI = useBuilderUIStore();
+  const bridgeActions = useBridgeAction({ dispatch: builder.dispatch, builderUI });
 
   return (
     <BuilderStateContext.Provider value={builder.template}>
@@ -27,7 +33,9 @@ export const BuilderProvider = ({
             canRedo: builder.canRedo,
           }}
         >
-          {children}
+          <BuilderUIContext.Provider value={{ ...builderUI, ...bridgeActions }}>
+            {children}
+          </BuilderUIContext.Provider>
         </BuilderHistoryContext.Provider>
       </BuilderDispatchContext.Provider>
     </BuilderStateContext.Provider>

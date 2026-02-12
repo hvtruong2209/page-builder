@@ -1,5 +1,3 @@
-import { TextField } from "./TextField";
-
 interface CommonColorInputProps {
   value: string;
   onChange: (value: string) => void;
@@ -7,9 +5,9 @@ interface CommonColorInputProps {
   label?: string;
 }
 
-export function CommonColorInput({ value, onChange, className, label }: CommonColorInputProps) {
+export const CommonColorInput = ({ value, onChange, className, label }: CommonColorInputProps) => {
   return (
-    <>
+    <div className="settings-panel__group">
       {label && <label className="settings-panel__label">{label}</label>}
       <div className="settings-panel__color-row">
         <input
@@ -18,13 +16,13 @@ export function CommonColorInput({ value, onChange, className, label }: CommonCo
           className={className}
           onChange={(e) => onChange(e.target.value)}
         />
-        <TextField
+        <input
           type="text"
           className="settings-panel__input"
           value={value}
-          onChange={onChange}
+          onChange={(e) => onChange(e.target.value)}
         />
       </div>
-    </>
+    </div>
   );
-}
+};

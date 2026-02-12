@@ -7,7 +7,7 @@ type CommonButtonProps = {
   text?: string;
 };
 
-const CommonButton = ({
+export const CommonButton = ({
   children,
   onClick,
   disabled,
@@ -21,5 +21,3 @@ const CommonButton = ({
     </button>
   );
 };
-
-export default CommonButton;

@@ -1,13 +1,14 @@
 import { Link } from "react-router-dom";
-import { useHistoryControls, useTemplate } from "../hooks/useBuilderProvider";
-import { exportToHtml } from "../services/exportToHtml";
-import { useSelectedElement } from "../hooks/useBuilderUIProvider";
-import CommonButton from "../../../components/Button";
+import { exportToHtml } from "../services/exportService.ts";
+import { CommonButton } from "../../../components/Button";
+import { useBuilderHistory } from "../hooks/useBuilderHistory.ts";
+import { useBuilderState } from "../hooks/useBuilderState.ts";
+import { useBuilderUI } from "../hooks/useBuilderUI.ts";
 
 const ActionTopBar = () => {
-  const { undo, redo, canUndo, canRedo } = useHistoryControls();
-  const template = useTemplate();
-  const { setShowPreview } = useSelectedElement();
+  const { undo, redo, canUndo, canRedo } = useBuilderHistory();
+  const template = useBuilderState();
+  const { setShowPreview } = useBuilderUI();
 
   const handleExport = () => {
     exportToHtml(template);

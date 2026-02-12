@@ -1,0 +1,105 @@
+.loading-page {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  background: linear-gradient(135deg, #0f0f1a 0%, #1a1a2e 50%, #16213e 100%);
+  font-family:
+    system-ui,
+    -apple-system,
+    sans-serif;
+}
+
+.loading-page__content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 24px;
+}
+
+/* Spinner rings */
+.loading-page__spinner {
+  position: relative;
+  width: 80px;
+  height: 80px;
+}
+
+.loading-page__ring {
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  border: 3px solid transparent;
+}
+
+.loading-page__ring:nth-child(1) {
+  border-top-color: #6366f1;
+  animation: loading-spin 1.2s linear infinite;
+}
+
+.loading-page__ring:nth-child(2) {
+  inset: 8px;
+  border-right-color: #a78bfa;
+  animation: loading-spin 1.6s linear infinite reverse;
+}
+
+.loading-page__ring:nth-child(3) {
+  inset: 16px;
+  border-bottom-color: #c4b5fd;
+  animation: loading-spin 2s linear infinite;
+}
+
+@keyframes loading-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Text */
+.loading-page__title {
+  margin: 0;
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: #e2e8f0;
+  letter-spacing: 0.02em;
+}
+
+.loading-page__subtitle {
+  margin: 0;
+  font-size: 0.875rem;
+  color: #94a3b8;
+}
+
+/* Bouncing dots */
+.loading-page__dots {
+  display: flex;
+  gap: 8px;
+}
+
+.loading-page__dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #6366f1;
+  animation: loading-bounce 1.4s ease-in-out infinite;
+}
+
+.loading-page__dot:nth-child(2) {
+  animation-delay: 0.2s;
+}
+
+.loading-page__dot:nth-child(3) {
+  animation-delay: 0.4s;
+}
+
+@keyframes loading-bounce {
+  0%,
+  80%,
+  100% {
+    transform: scale(0.6);
+    opacity: 0.4;
+  }
+  40% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}

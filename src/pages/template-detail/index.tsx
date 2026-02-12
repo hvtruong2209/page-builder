@@ -3,11 +3,9 @@ import { configTemplates } from "../../config/template";
 import DetailBuilderLayout from "../../features/detail-template/DetailBuilderLayout";
 import NotFoundPage from "../not-found";
 import { BuilderProvider } from "../../features/detail-template/providers/BuilderProvider";
-import { BuilderUIProvider } from "../../features/detail-template/providers/BuilderUIContext";
 
 const DetailTemplate = () => {
   const { id } = useParams();
-
   const template = configTemplates.find((t) => t.id === id);
 
   if (!template) {
@@ -16,9 +14,7 @@ const DetailTemplate = () => {
 
   return (
     <BuilderProvider initial={template}>
-      <BuilderUIProvider>
-        <DetailBuilderLayout />
-      </BuilderUIProvider>
+      <DetailBuilderLayout />
     </BuilderProvider>
   );
 };

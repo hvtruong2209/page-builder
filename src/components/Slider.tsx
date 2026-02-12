@@ -14,7 +14,7 @@ type CommonSliderProps = {
   onChangeEnd?: (value: number) => void;
 };
 
-export function CommonSlider({
+export const CommonSlider = ({
   value,
   min = 0,
   max = 100,
@@ -25,11 +25,11 @@ export function CommonSlider({
   className,
   amountText,
   label,
-}: CommonSliderProps) {
+}: CommonSliderProps) => {
   const isDragging = useRef(false);
 
   return (
-    <>
+    <div className="settings-panel__group">
       {label && <label className="settings-panel__label"> {label}</label>}
       <div className="settings-panel__range-row">
         <input
@@ -57,6 +57,6 @@ export function CommonSlider({
         />
         {amountText && <span className="settings-panel__range-value">{amountText}</span>}
       </div>
-    </>
+    </div>
   );
-}
+};
