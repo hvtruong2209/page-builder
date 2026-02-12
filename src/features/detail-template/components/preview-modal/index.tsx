@@ -1,7 +1,7 @@
-import { CommonButton } from "../../../components/Button";
-import { useBuilderState } from "../hooks/useBuilderState";
-import PageContent from "./PageContent";
-import "./PreviewModal.css";
+import { CommonButton } from "../../../../components/Button";
+import { useBuilderState } from "../../hooks/useBuilderState";
+import { PageContent } from "../page-content";
+import "./index.css";
 
 export const PreviewModal = ({ onClose }: { onClose: () => void }) => {
   const template = useBuilderState();

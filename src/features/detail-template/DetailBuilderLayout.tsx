@@ -1,8 +1,8 @@
 import "./DetailBuilderLayout.css";
-import ActionTopBar from "./components/ActionTopBar";
-import PageContent from "./components/PageContent";
-import { PreviewModal } from "./components/PreviewModal";
-import SettingsPanel from "./components/SettingsPanel";
+import { ActionTopBar } from "./components/action-top-bar";
+import { PageContent } from "./components/page-content";
+import { PreviewModal } from "./components/preview-modal";
+import SettingsPanel from "./components/settings-panel";
 import { useBuilderUI } from "./hooks/useBuilderUI";
 
 const DetailBuilderLayout = () => {

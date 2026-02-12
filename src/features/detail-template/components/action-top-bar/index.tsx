@@ -1,11 +1,11 @@
 import { Link } from "react-router-dom";
-import { exportToHtml } from "../services/exportService.ts";
-import { CommonButton } from "../../../components/Button";
-import { useBuilderHistory } from "../hooks/useBuilderHistory.ts";
-import { useBuilderState } from "../hooks/useBuilderState.ts";
-import { useBuilderUI } from "../hooks/useBuilderUI.ts";
+import { exportToHtml } from "../../services/exportService.ts";
+import { CommonButton } from "../../../../components/Button.tsx";
+import { useBuilderHistory } from "../../hooks/useBuilderHistory.ts";
+import { useBuilderState } from "../../hooks/useBuilderState.ts";
+import { useBuilderUI } from "../../hooks/useBuilderUI.ts";
 
-const ActionTopBar = () => {
+export const ActionTopBar = () => {
   const { undo, redo, canUndo, canRedo } = useBuilderHistory();
   const template = useBuilderState();
   const { setShowPreview } = useBuilderUI();
@@ -47,5 +47,3 @@ const ActionTopBar = () => {
     </div>
   );
 };
-
-export default ActionTopBar;

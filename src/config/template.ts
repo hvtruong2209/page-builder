@@ -113,7 +113,7 @@ export const configTemplates: Template[] = [
       {
         id: "heading-1",
         type: "heading",
-        text: "Jane Doe — Designer",
+        text: "Van Truong — Hello",
         fontSize: 36,
         fontWeight: "bold",
         fontStyle: "normal",
