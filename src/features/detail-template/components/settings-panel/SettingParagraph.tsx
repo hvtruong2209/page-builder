@@ -8,7 +8,7 @@ import {
   DEFAULT_SPACING,
   FONT_STYLE_OPTIONS,
   FONT_WEIGHT_OPTIONS,
-} from "../../../../config/variable";
+} from "../../../../constants/variable";
 import type { ParagraphElement } from "../../../../types/element";
 import type { FontStyle, FontWeight } from "../../../../types/styles";
 import { useBuilderUI } from "../../hooks/useBuilderUI";

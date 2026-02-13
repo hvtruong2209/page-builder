@@ -1,4 +1,4 @@
-import { BUILDER_ACTION_TYPE } from "../../../../config/variable";
+import { BUILDER_ACTION_TYPE } from "../../../../constants/variable";
 import type {
   HeadingElement,
   ParagraphElement,

@@ -2,7 +2,7 @@ import { CommonButton } from "../../../../components/Button";
 import { CommonColorInput } from "../../../../components/ColorInput";
 import { CommonSlider } from "../../../../components/Slider";
 import { SpacingControls } from "../../../../components/SpacingControls";
-import { DEFAULT_SPACING } from "../../../../config/variable";
+import { DEFAULT_SPACING } from "../../../../constants/variable";
 import type { SectionElement } from "../../../../types/element";
 import { useBuilderUI } from "../../hooks/useBuilderUI";
 

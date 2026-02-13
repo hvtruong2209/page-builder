@@ -2,9 +2,9 @@
 import { useCallback } from "react";
 import type { PageSettings, TemplateElement } from "../../../types/element";
 import type { Draft } from "../../../types/element";
-import { BUILDER_ACTION_TYPE } from "../../../config/variable";
+import { BUILDER_ACTION_TYPE } from "../../../constants/variable";
 
-interface props {
+interface UseBridgeActionProps {
   dispatch: React.Dispatch<any>;
   builderUI: {
     selectedElementId: string | null;
@@ -16,7 +16,7 @@ interface props {
   };
 }
 
-export const useBridgeAction = ({ dispatch, builderUI }: props) => {
+export const useBridgeAction = ({ dispatch, builderUI }: UseBridgeActionProps) => {
   const beginDraft = useCallback(
     (id: string) => {
       builderUI.setDraft({

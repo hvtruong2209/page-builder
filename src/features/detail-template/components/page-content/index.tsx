@@ -1,10 +1,10 @@
 import "./index.css";
 import type { TemplateElement, SectionElement } from "../../../../types/element";
 import { spacingStyle } from "../../services/elementService";
-import { usePageContent } from "./usePageCotent";
+import { usePageContent } from "./usePageContent";
 import { useBuilderState } from "../../hooks/useBuilderState";
 import { useBuilderUI } from "../../hooks/useBuilderUI";
-import { ELEMENT_TYPE, LAYOUT_OPTIONS } from "../../../../config/variable";
+import { ELEMENT_TYPE, LAYOUT_OPTIONS } from "../../../../constants/variable";
 
 // ============= The main PageContent component =============
 export const PageContent = ({ isPreview }: { isPreview?: boolean }) => {

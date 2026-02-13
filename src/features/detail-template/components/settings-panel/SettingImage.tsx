@@ -2,7 +2,7 @@ import { CommonSelect } from "../../../../components/Select";
 import { CommonSlider } from "../../../../components/Slider";
 import { SpacingControls } from "../../../../components/SpacingControls";
 import { TextField } from "../../../../components/TextField";
-import { ALIGNMENT_OPTIONS, DEFAULT_SPACING } from "../../../../config/variable";
+import { ALIGNMENT_OPTIONS, DEFAULT_SPACING } from "../../../../constants/variable";
 import type { ImageElement } from "../../../../types/element";
 import { useBuilderUI } from "../../hooks/useBuilderUI";
 

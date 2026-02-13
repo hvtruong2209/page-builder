@@ -1,5 +1,5 @@
 import "./TemplateSelector.css";
-import { configTemplates } from "../../config/template";
+import { configTemplates } from "../../constants/template";
 import { TemplateMiniPreview } from "./components/TemplateMiniPreview";
 import { Link } from "react-router-dom";
 

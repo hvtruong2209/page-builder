@@ -1,4 +1,4 @@
-import type { ELEMENT_TYPE } from "../config/variable";
+import type { ELEMENT_TYPE } from "../constants/variable";
 
 export type ElementType = (typeof ELEMENT_TYPE)[keyof typeof ELEMENT_TYPE];
 

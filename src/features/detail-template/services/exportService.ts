@@ -1,4 +1,4 @@
-import { DEFAULT_SPACING, ELEMENT_TYPE, LAYOUT_OPTIONS } from "../../../config/variable";
+import { DEFAULT_SPACING, ELEMENT_TYPE, LAYOUT_OPTIONS } from "../../../constants/variable";
 import { type TemplateElement, type SectionElement, type Template } from "../../../types/element";
 import type { Spacing } from "../../../types/styles";
 

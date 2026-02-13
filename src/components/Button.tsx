@@ -1,11 +1,11 @@
-type CommonButtonProps = {
+interface CommonButtonProps {
   children?: React.ReactNode;
   onClick?: () => void;
   disabled?: boolean;
   title?: string;
   className?: string;
   text?: string;
-};
+}
 
 export const CommonButton = ({
   children,

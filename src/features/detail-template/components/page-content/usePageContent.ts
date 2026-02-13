@@ -2,7 +2,7 @@ import { useRef } from "react";
 import type { TemplateElement } from "../../../../types/element";
 import { useBuilderDispatch } from "../../hooks/useBuilderDispatch";
 import { useBuilderUI } from "../../hooks/useBuilderUI";
-import { BUILDER_ACTION_TYPE, ELEMENT_TYPE } from "../../../../config/variable";
+import { BUILDER_ACTION_TYPE, ELEMENT_TYPE } from "../../../../constants/variable";
 
 export const usePageContent = (el: TemplateElement) => {
   const dispatch = useBuilderDispatch();

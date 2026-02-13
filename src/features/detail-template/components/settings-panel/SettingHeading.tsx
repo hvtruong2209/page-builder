@@ -8,7 +8,7 @@ import {
   DEFAULT_SPACING,
   FONT_STYLE_OPTIONS,
   FONT_WEIGHT_OPTIONS,
-} from "../../../../config/variable";
+} from "../../../../constants/variable";
 import type { HeadingElement } from "../../../../types/element";
 import type { FontStyle, FontWeight } from "../../../../types/styles";
 

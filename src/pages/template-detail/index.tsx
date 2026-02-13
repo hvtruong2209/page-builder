@@ -1,5 +1,5 @@
 import { useParams } from "react-router-dom";
-import { configTemplates } from "../../config/template";
+import { configTemplates } from "../../constants/template";
 import DetailBuilderLayout from "../../features/detail-template/DetailBuilderLayout";
 import NotFoundPage from "../not-found";
 import { BuilderProvider } from "../../features/detail-template/providers/BuilderProvider";

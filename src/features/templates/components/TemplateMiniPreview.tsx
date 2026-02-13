@@ -1,13 +1,13 @@
 import { useRef, useState, useEffect } from "react";
 import type { SectionElement, Template, TemplateElement } from "../../../types/element";
-import { ELEMENT_TYPE, LAYOUT_OPTIONS } from "../../../config/variable";
+import { ELEMENT_TYPE, LAYOUT_OPTIONS } from "../../../constants/variable";
 import { spacingStyle } from "../../detail-template/services/elementService";
 
-interface Props {
+interface TemplateMiniPreviewProps {
   template: Template;
 }
 
-export const TemplateMiniPreview = ({ template }: Props) => {
+export const TemplateMiniPreview = ({ template }: TemplateMiniPreviewProps) => {
   const { pageSettings, elements, layout } = template;
 
   // Ref and state for scaling

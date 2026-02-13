@@ -1,4 +1,4 @@
-import type { ELEMENT_TYPE, LAYOUT_OPTIONS } from "../config/variable";
+import type { ELEMENT_TYPE, LAYOUT_OPTIONS } from "../constants/variable";
 import type { Spacing, FontWeight, FontStyle, TextAlignment, ElementType } from "./styles";
 
 export interface BaseElement {

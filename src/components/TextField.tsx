@@ -1,4 +1,4 @@
-type TextFieldProps = {
+interface TextFieldProps {
   value?: string;
   onChange?: (value: string) => void;
 
@@ -11,7 +11,7 @@ type TextFieldProps = {
   placeholder?: string;
   disabled?: boolean;
   label?: string;
-};
+}
 
 export const TextField = ({
   value = "",

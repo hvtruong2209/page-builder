@@ -14,19 +14,19 @@ import { SettingParagraph } from "./SettingParagraph";
 import { SettingSection } from "./SettingSection";
 
 import { useSettingsPanel } from "./useSettingsPanel";
-import { ELEMENT_TYPE } from "../../../../config/variable";
+import { ELEMENT_TYPE } from "../../../../constants/variable";
 
 // ============= Main settings panel component =============
 const SettingsPanel = () => {
   const { selectedElement, pageSettings, updateElement, handleDuplicate, handleRemove } =
     useSettingsPanel();
 
-  // ============= If no element is selected, show page settings =============
+  //  If no element is selected, show page settings
   if (!selectedElement) {
     return <SettingPage pageSettings={pageSettings} />;
   }
 
-  // ============= If an element is selected, show element settings =============
+  //  If an element is selected, show element settings
   return (
     <div className="settings-panel">
       <div className="settings-panel__header-row">

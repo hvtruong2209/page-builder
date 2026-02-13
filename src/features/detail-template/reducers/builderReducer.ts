@@ -2,7 +2,7 @@
 import { produce } from "immer";
 import type { PageSettings, TemplateElement, Template } from "../../../types/element";
 import { updateElementDeep } from "../services/elementService";
-import { BUILDER_ACTION_TYPE } from "../../../config/variable";
+import { BUILDER_ACTION_TYPE } from "../../../constants/variable";
 
 export type BuilderAction =
   | {

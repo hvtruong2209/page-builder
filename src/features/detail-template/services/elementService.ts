@@ -1,4 +1,4 @@
-import { DEFAULT_SPACING, ELEMENT_TYPE } from "../../../config/variable";
+import { DEFAULT_SPACING, ELEMENT_TYPE } from "../../../constants/variable";
 import type { TemplateElement, SectionElement } from "../../../types/element";
 
 export const findElement = (elements: TemplateElement[], id: string): TemplateElement | null => {

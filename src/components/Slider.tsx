@@ -1,6 +1,6 @@
 import { useRef } from "react";
 
-type CommonSliderProps = {
+interface CommonSliderProps {
   value: number;
   min?: number;
   max?: number;
@@ -12,7 +12,7 @@ type CommonSliderProps = {
   onChange: (value: number) => void;
   onChangeStart?: () => void;
   onChangeEnd?: (value: number) => void;
-};
+}
 
 export const CommonSlider = ({
   value,
