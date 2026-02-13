@@ -26,7 +26,9 @@ export const SettingImage = ({
         type="text"
         className="settings-panel__input"
         value={el.alt}
-        onChange={(value) => updateElement(el.id, { alt: value })}
+        onChangeStart={() => beginDraft(el.id)}
+        onChange={(value) => updateDraft({ alt: value })}
+        onChangeEnd={() => commitDraft()}
       />
       <CommonSlider
         label="Width (%)"
@@ -49,8 +51,12 @@ export const SettingImage = ({
       <SpacingControls
         margin={el.margin || DEFAULT_SPACING}
         padding={el.padding || DEFAULT_SPACING}
-        onMarginChange={(margin) => updateElement(el.id, { margin })}
-        onPaddingChange={(padding) => updateElement(el.id, { padding })}
+        onChangeStart={() => beginDraft(el.id)}
+        onMarginChange={(value) => {
+          updateDraft({ margin: { ...value } });
+        }}
+        onPaddingChange={(value) => updateDraft({ padding: value })}
+        onChangeEnd={() => commitDraft()}
       />
     </>
   );

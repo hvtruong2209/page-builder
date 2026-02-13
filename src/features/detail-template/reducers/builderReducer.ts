@@ -2,97 +2,77 @@
 import { produce } from "immer";
 import type { PageSettings, TemplateElement, Template } from "../../../types/element";
 import { updateElementDeep } from "../services/elementService";
+import { BUILDER_ACTION_TYPE } from "../../../config/variable";
 
 export type BuilderAction =
   | {
-      type: "UPDATE_PAGE_SETTING";
+      type: typeof BUILDER_ACTION_TYPE.UPDATE_PAGE_SETTING;
       payload: {
         key: keyof PageSettings;
         value: PageSettings[keyof PageSettings];
       };
     }
   | {
-      type: "UPDATE_PAGE_SETTINGS";
+      type: typeof BUILDER_ACTION_TYPE.UPDATE_PAGE_SETTINGS;
       payload: Partial<PageSettings>;
     }
   | {
-      type: "ADD_ELEMENT";
+      type: typeof BUILDER_ACTION_TYPE.ADD_ELEMENT;
       payload: {
         element: TemplateElement;
         afterId?: string;
       };
     }
-  | { type: "DELETE_ELEMENT"; payload: string }
+  | { type: typeof BUILDER_ACTION_TYPE.DELETE_ELEMENT; payload: string }
   | {
-      type: "UPDATE_ELEMENT";
+      type: typeof BUILDER_ACTION_TYPE.UPDATE_ELEMENT;
       payload: {
         id: string;
         changes: Partial<TemplateElement>;
       };
     }
-  | {
-      type: "REORDER_ELEMENTS";
-      payload: {
-        fromIndex: number;
-        toIndex: number;
-      };
-    }
-  | { type: "UNDO" }
-  | { type: "REDO" };
+  | { type: typeof BUILDER_ACTION_TYPE.UNDO }
+  | { type: typeof BUILDER_ACTION_TYPE.REDO };
 
 export const builderReducer = produce((draft: Template, action: BuilderAction) => {
   switch (action.type) {
-    case "UPDATE_PAGE_SETTING": {
+    case BUILDER_ACTION_TYPE.UPDATE_PAGE_SETTING: {
       const { key, value } = action.payload;
       (draft.pageSettings as any)[key] = value;
       return;
     }
 
-    case "UPDATE_PAGE_SETTINGS": {
+    case BUILDER_ACTION_TYPE.UPDATE_PAGE_SETTINGS: {
       Object.assign(draft.pageSettings, action.payload);
       return;
     }
 
-    case "ADD_ELEMENT": {
+    case BUILDER_ACTION_TYPE.ADD_ELEMENT: {
       const { element, afterId } = action.payload;
-
       if (!afterId) {
         draft.elements.push(element);
         return;
       }
 
       const index = draft.elements.findIndex((el) => el.id === afterId);
-
       if (index === -1) {
         draft.elements.push(element);
         return;
       }
-
       draft.elements.splice(index + 1, 0, element);
-
       return;
     }
 
-    case "DELETE_ELEMENT": {
+    case BUILDER_ACTION_TYPE.DELETE_ELEMENT: {
       const index = draft.elements.findIndex((el) => el.id === action.payload);
       if (index !== -1) {
         draft.elements.splice(index, 1);
       }
-
       return;
     }
 
-    case "UPDATE_ELEMENT": {
+    case BUILDER_ACTION_TYPE.UPDATE_ELEMENT: {
       draft.elements = updateElementDeep(draft.elements, action.payload.id, action.payload.changes);
-
-      return;
-    }
-
-    case "REORDER_ELEMENTS": {
-      const { fromIndex, toIndex } = action.payload;
-      const [moved] = draft.elements.splice(fromIndex, 1);
-      draft.elements.splice(toIndex, 0, moved);
-
       return;
     }
 

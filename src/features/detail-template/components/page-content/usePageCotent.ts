@@ -1,15 +1,12 @@
 import { useRef } from "react";
 import type { TemplateElement } from "../../../../types/element";
 import { useBuilderDispatch } from "../../hooks/useBuilderDispatch";
-import { useBuilderState } from "../../hooks/useBuilderState";
 import { useBuilderUI } from "../../hooks/useBuilderUI";
+import { BUILDER_ACTION_TYPE, ELEMENT_TYPE } from "../../../../config/variable";
 
-export const usePageContent = () => {
+export const usePageContent = (el: TemplateElement) => {
   const dispatch = useBuilderDispatch();
-  const template = useBuilderState();
   const { selectedElementId, setSelectedElementId, draft } = useBuilderUI();
-
-  const { elements, pageSettings, layout } = template;
 
   const editingRef = useRef<HTMLElement | null>(null);
 
@@ -19,11 +16,11 @@ export const usePageContent = () => {
   };
 
   const handleBlur = (el: TemplateElement, e: React.FocusEvent<HTMLElement>) => {
-    if (el.type === "image" || el.type === "section") return;
+    if (el.type === ELEMENT_TYPE.IMAGE || el.type === ELEMENT_TYPE.SECTION) return;
     const newText = e.currentTarget.innerText;
     if (newText !== el.text) {
       dispatch({
-        type: "UPDATE_ELEMENT",
+        type: BUILDER_ACTION_TYPE.UPDATE_ELEMENT,
         payload: {
           id: el.id,
           changes: {
@@ -42,19 +39,17 @@ export const usePageContent = () => {
     }
   };
 
-  const pageSettingsDisplay =
-    draft && draft.kind === "page" ? { ...pageSettings, ...draft.changes } : pageSettings;
+  const isSelected = el.id === selectedElementId;
+
+  const displayEl: TemplateElement =
+    draft && draft.kind === "element" && draft.id === el.id ? { ...el, ...draft.changes } : el;
 
   return {
-    elements,
-    layout,
-    pageSettingsDisplay: pageSettingsDisplay,
-    selectedElementId,
     editingRef,
-    draft,
+    isSelected,
+    displayEl,
     handleClick,
     handleBlur,
     handleKeyDown,
-    setSelectedElementId,
   };
 };

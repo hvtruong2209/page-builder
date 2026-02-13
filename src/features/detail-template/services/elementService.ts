@@ -1,10 +1,10 @@
-import { DEFAULT_SPACING } from "../../../config/variable";
+import { DEFAULT_SPACING, ELEMENT_TYPE } from "../../../config/variable";
 import type { TemplateElement, SectionElement } from "../../../types/element";
 
 export const findElement = (elements: TemplateElement[], id: string): TemplateElement | null => {
   for (const el of elements) {
     if (el.id === id) return el;
-    if (el.type === "section") {
+    if (el.type === ELEMENT_TYPE.SECTION) {
       const found = findElement((el as SectionElement).children, id);
       if (found) return found;
     }
@@ -25,7 +25,7 @@ export const updateElementDeep = (
       } as TemplateElement;
     }
 
-    if (el.type === "section") {
+    if (el.type === ELEMENT_TYPE.SECTION) {
       return {
         ...el,
         children: updateElementDeep(el.children, id, changes),

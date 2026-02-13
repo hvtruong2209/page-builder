@@ -158,6 +158,7 @@
   font-weight: 600;
   cursor: pointer;
   transition: background 0.15s;
+  margin-bottom: 12px;
 }
 .settings-panel__swap-btn:hover {
   background: #3a56d4;
@@ -204,7 +205,6 @@
 .settings-panel__spacing-item {
   display: flex;
   flex-direction: column;
-  align-items: center;
   gap: 2px;
 }
 .settings-panel__spacing-label {

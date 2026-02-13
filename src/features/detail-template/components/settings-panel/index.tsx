@@ -14,21 +14,16 @@ import { SettingParagraph } from "./SettingParagraph";
 import { SettingSection } from "./SettingSection";
 
 import { useSettingsPanel } from "./useSettingsPanel";
+import { ELEMENT_TYPE } from "../../../../config/variable";
 
 // ============= Main settings panel component =============
 const SettingsPanel = () => {
-  const {
-    selectedElement,
-    pageSettings,
-    updateElement,
-    updatePageSetting,
-    handleDuplicate,
-    handleRemove,
-  } = useSettingsPanel();
+  const { selectedElement, pageSettings, updateElement, handleDuplicate, handleRemove } =
+    useSettingsPanel();
 
   // ============= If no element is selected, show page settings =============
   if (!selectedElement) {
-    return <SettingPage pageSettings={pageSettings} updatePageSetting={updatePageSetting} />;
+    return <SettingPage pageSettings={pageSettings} />;
   }
 
   // ============= If an element is selected, show element settings =============
@@ -83,14 +78,14 @@ const FieldConfig = ({
   ) => void;
 }) => {
   switch (selectedElement.type) {
-    case "section":
+    case ELEMENT_TYPE.SECTION:
       return <SettingSection selectedElement={selectedElement} updateElement={updateElement} />;
-    case "heading": {
+    case ELEMENT_TYPE.HEADING: {
       return <SettingHeading selectedElement={selectedElement} updateElement={updateElement} />;
     }
-    case "paragraph":
+    case ELEMENT_TYPE.PARAGRAPH:
       return <SettingParagraph selectedElement={selectedElement} updateElement={updateElement} />;
-    case "image":
+    case ELEMENT_TYPE.IMAGE:
       return <SettingImage selectedElement={selectedElement} updateElement={updateElement} />;
     default:
       return null;

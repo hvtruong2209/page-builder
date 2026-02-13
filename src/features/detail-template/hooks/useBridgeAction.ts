@@ -2,6 +2,7 @@
 import { useCallback } from "react";
 import type { PageSettings, TemplateElement } from "../../../types/element";
 import type { Draft } from "../../../types/element";
+import { BUILDER_ACTION_TYPE } from "../../../config/variable";
 
 interface props {
   dispatch: React.Dispatch<any>;
@@ -51,7 +52,7 @@ export const useBridgeAction = ({ dispatch, builderUI }: props) => {
 
     if (builderUI.draft.kind === "element") {
       dispatch({
-        type: "UPDATE_ELEMENT",
+        type: BUILDER_ACTION_TYPE.UPDATE_ELEMENT,
         payload: {
           id: builderUI.draft.id,
           changes: builderUI.draft.changes,
@@ -66,7 +67,7 @@ export const useBridgeAction = ({ dispatch, builderUI }: props) => {
     (id: string | null) => {
       if (builderUI.draft && builderUI.draft.kind === "element") {
         dispatch({
-          type: "UPDATE_ELEMENT",
+          type: BUILDER_ACTION_TYPE.UPDATE_ELEMENT,
           payload: {
             id: builderUI.draft.id,
             changes: builderUI.draft.changes,
@@ -108,7 +109,7 @@ export const useBridgeAction = ({ dispatch, builderUI }: props) => {
     if (!builderUI.draft || builderUI.draft.kind !== "page") return;
 
     dispatch({
-      type: "UPDATE_PAGE_SETTINGS",
+      type: BUILDER_ACTION_TYPE.UPDATE_PAGE_SETTINGS,
       payload: builderUI.draft.changes,
     });
 

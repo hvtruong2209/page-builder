@@ -1,4 +1,4 @@
-import { DEFAULT_SPACING } from "../../../config/variable";
+import { DEFAULT_SPACING, ELEMENT_TYPE, LAYOUT_OPTIONS } from "../../../config/variable";
 import { type TemplateElement, type SectionElement, type Template } from "../../../types/element";
 import type { Spacing } from "../../../types/styles";
 
@@ -11,16 +11,16 @@ const renderElementHtml = (el: TemplateElement): string => {
   const p = el.padding || DEFAULT_SPACING;
   const sp = `${spacingCss("margin", m)}${spacingCss("padding", p)}`;
 
-  if (el.type === "heading") {
+  if (el.type === ELEMENT_TYPE.HEADING) {
     return `<h1 style="font-size:${el.fontSize}px;font-weight:${el.fontWeight || "bold"};font-style:${el.fontStyle || "normal"};color:${el.color};text-align:${el.alignment};${sp}line-height:1.2;">${escapeHtml(el.text)}</h1>`;
   }
-  if (el.type === "paragraph") {
+  if (el.type === ELEMENT_TYPE.PARAGRAPH) {
     return `<p style="font-size:${el.fontSize}px;font-weight:${el.fontWeight || "normal"};font-style:${el.fontStyle || "normal"};color:${el.color};text-align:${el.alignment};${sp}line-height:1.6;">${escapeHtml(el.text)}</p>`;
   }
-  if (el.type === "image") {
+  if (el.type === ELEMENT_TYPE.IMAGE) {
     return `<div style="text-align:${el.alignment};${sp}"><img src="${escapeHtml(el.src)}" alt="${escapeHtml(el.alt)}" style="width:${el.width}%;max-width:100%;border-radius:6px;" /></div>`;
   }
-  if (el.type === "section") {
+  if (el.type === ELEMENT_TYPE.SECTION) {
     const section = el as SectionElement;
     const ordered = section.reversed ? [...section.children].reverse() : section.children;
     const childrenHtml = ordered.map(renderElementHtml).join("\n      ");
@@ -31,13 +31,21 @@ const renderElementHtml = (el: TemplateElement): string => {
   return "";
 };
 
+const escapeHtml = (s: string) => {
+  return s
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;");
+};
+
 export const exportToHtml = (template: Template) => {
   const { pageSettings, elements, layout } = template;
 
   const elementsHtml = elements.map(renderElementHtml).join("\n    ");
 
   const containerStyle =
-    layout === "two-column"
+    layout === LAYOUT_OPTIONS.TWO_COLUMN
       ? `display:grid;grid-template-columns:1fr 1fr;gap:32px;align-items:center;`
       : "";
 
@@ -75,12 +83,4 @@ export const exportToHtml = (template: Template) => {
   a.download = `${template.id}.html`;
   a.click();
   URL.revokeObjectURL(url);
-};
-
-const escapeHtml = (s: string) => {
-  return s
-    .replace(/&/g, "&amp;")
-    .replace(/</g, "&lt;")
-    .replace(/>/g, "&gt;")
-    .replace(/"/g, "&quot;");
 };

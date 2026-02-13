@@ -1,3 +1,4 @@
+import { BUILDER_ACTION_TYPE } from "../../../../config/variable";
 import type {
   HeadingElement,
   ParagraphElement,
@@ -25,20 +26,10 @@ export const useSettingsPanel = () => {
     changes: Partial<HeadingElement | ParagraphElement | ImageElement | SectionElement>,
   ) => {
     dispatch({
-      type: "UPDATE_ELEMENT",
+      type: BUILDER_ACTION_TYPE.UPDATE_ELEMENT,
       payload: {
         id,
         changes,
-      },
-    });
-  };
-
-  const updatePageSetting = (key: keyof typeof pageSettings, value: string | number) => {
-    dispatch({
-      type: "UPDATE_PAGE_SETTING",
-      payload: {
-        key,
-        value,
       },
     });
   };
@@ -50,21 +41,20 @@ export const useSettingsPanel = () => {
       id: `${selectedElement.id}-${crypto.randomUUID()}`,
     };
     dispatch({
-      type: "ADD_ELEMENT",
+      type: BUILDER_ACTION_TYPE.ADD_ELEMENT,
       payload: { element: newElement, afterId: selectedElement.id },
     });
   };
 
   const handleRemove = () => {
     if (!selectedElement) return;
-    dispatch({ type: "DELETE_ELEMENT", payload: selectedElement.id });
+    dispatch({ type: BUILDER_ACTION_TYPE.DELETE_ELEMENT, payload: selectedElement.id });
   };
 
   return {
     selectedElement,
     pageSettings,
     updateElement,
-    updatePageSetting,
     handleDuplicate,
     handleRemove,
   };

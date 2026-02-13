@@ -1,3 +1,4 @@
+import { CommonButton } from "../../../../components/Button";
 import { CommonColorInput } from "../../../../components/ColorInput";
 import { CommonSlider } from "../../../../components/Slider";
 import { SpacingControls } from "../../../../components/SpacingControls";
@@ -12,7 +13,7 @@ export const SettingSection = ({
   selectedElement: SectionElement;
   updateElement: (id: string, changes: Partial<SectionElement>) => void;
 }) => {
-  const { draft } = useBuilderUI();
+  const { draft, updateDraft, beginDraft, commitDraft } = useBuilderUI();
   const el =
     draft && draft.kind === "element" && selectedElement && draft.id === selectedElement.id
       ? { ...selectedElement, ...draft.changes }
@@ -20,21 +21,20 @@ export const SettingSection = ({
 
   return (
     <>
-      <div className="settings-panel__group">
-        <button
-          className="settings-panel__swap-btn"
-          // onClick={() => onElementChange({ ...el, reversed: !el.reversed })}
-        >
-          ⇄ Swap Left / Right
-        </button>
-      </div>
+      <CommonButton
+        className="settings-panel__swap-btn"
+        onClick={() => updateElement(el.id, { reversed: !el.reversed })}
+        text="⇄ Swap Left / Right"
+      />
       <CommonSlider
         label="Gap"
         className="settings-panel__range"
         min={0}
         max={64}
         value={el.gap}
-        onChange={(value) => updateElement(el.id, { gap: value })}
+        onChangeStart={() => beginDraft(el.id)}
+        onChange={(value) => updateDraft({ gap: value })}
+        onChangeEnd={() => commitDraft()}
         amountText={`${el.gap}px`}
       />
       <CommonSlider
@@ -43,20 +43,28 @@ export const SettingSection = ({
         min={0}
         max={32}
         value={el.borderRadius}
-        onChange={(value) => updateElement(el.id, { borderRadius: value })}
+        onChangeStart={() => beginDraft(el.id)}
+        onChange={(value) => updateDraft({ borderRadius: value })}
+        onChangeEnd={() => commitDraft()}
         amountText={`${el.borderRadius}px`}
       />
       <CommonColorInput
         label="Background Color"
         className="settings-panel__color-input"
         value={el.backgroundColor}
-        onChange={(value: string) => updateElement(el.id, { backgroundColor: value })}
+        onChangeEnd={() => commitDraft()}
+        onChange={(value) => updateDraft({ backgroundColor: value })}
+        onChangeStart={() => beginDraft(el.id)}
       />
       <SpacingControls
         margin={el.margin || DEFAULT_SPACING}
         padding={el.padding || DEFAULT_SPACING}
-        onMarginChange={(margin) => updateElement(el.id, { margin })}
-        onPaddingChange={(padding) => updateElement(el.id, { padding })}
+        onChangeStart={() => beginDraft(el.id)}
+        onMarginChange={(value) => {
+          updateDraft({ margin: { ...value } });
+        }}
+        onPaddingChange={(value) => updateDraft({ padding: value })}
+        onChangeEnd={() => commitDraft()}
       />
       <div className="settings-panel__section-children">
         <label className="settings-panel__label">Children ({el.children.length} elements)</label>

@@ -5,9 +5,10 @@ import { useBuilderHistory } from "../../hooks/useBuilderHistory.ts";
 import { useBuilderState } from "../../hooks/useBuilderState.ts";
 import { useBuilderUI } from "../../hooks/useBuilderUI.ts";
 
+// ============= The ActionTopBar component =============
 export const ActionTopBar = () => {
-  const { undo, redo, canUndo, canRedo } = useBuilderHistory();
   const template = useBuilderState();
+  const { undo, redo, canUndo, canRedo } = useBuilderHistory();
   const { setShowPreview } = useBuilderUI();
 
   const handleExport = () => {

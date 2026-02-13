@@ -3,13 +3,7 @@ import { CommonSlider } from "../../../../components/Slider";
 import type { PageSettings } from "../../../../types/element";
 import { useBuilderUI } from "../../hooks/useBuilderUI";
 
-export const SettingPage = ({
-  pageSettings,
-  updatePageSetting,
-}: {
-  pageSettings: PageSettings;
-  updatePageSetting: (key: keyof PageSettings, value: string | number) => void;
-}) => {
+export const SettingPage = ({ pageSettings }: { pageSettings: PageSettings }) => {
   const { draft, beginPageDraft, updatePageDraft, commitPageDraft } = useBuilderUI();
 
   const pageSettingsDisplay =
@@ -18,12 +12,14 @@ export const SettingPage = ({
   return (
     <div className="builder__settings-pane">
       <div className="settings-panel">
-        <h3 className="settings-panel__title">Settings</h3>
+        <h3 className="settings-panel__title">Page Settings</h3>
         <CommonColorInput
           label="Background Color"
           className="settings-panel__color-input"
           value={pageSettingsDisplay.backgroundColor}
-          onChange={(value: string) => updatePageSetting("backgroundColor", value)}
+          onChangeStart={() => beginPageDraft()}
+          onChange={(value) => updatePageDraft({ backgroundColor: value })}
+          onChangeEnd={() => commitPageDraft()}
         />
         <CommonSlider
           label="Content Width"
@@ -31,8 +27,8 @@ export const SettingPage = ({
           min={600}
           max={1400}
           value={pageSettingsDisplay.contentWidth}
-          onChange={(value) => updatePageDraft({ contentWidth: value })}
           onChangeStart={() => beginPageDraft()}
+          onChange={(value) => updatePageDraft({ contentWidth: value })}
           onChangeEnd={() => commitPageDraft()}
           amountText={`${pageSettingsDisplay.contentWidth}px`}
         />
