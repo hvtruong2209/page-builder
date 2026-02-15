@@ -66,24 +66,6 @@ export const useBridgeAction = ({ dispatch, builderUI }: UseBridgeActionProps) =
     [builderUI, commitDraft],
   );
 
-  const selectOtherElement = useCallback(
-    (id: string | null) => {
-      if (builderUI.draft && builderUI.draft.kind === "element") {
-        dispatch({
-          type: BUILDER_ACTION_TYPE.UPDATE_ELEMENT,
-          payload: {
-            id: builderUI.draft.id,
-            changes: builderUI.draft.changes,
-          },
-        });
-      }
-
-      builderUI.setDraft(null);
-      builderUI.setSelectedElementId(id);
-    },
-    [builderUI, dispatch],
-  );
-
   const beginPageDraft = useCallback(() => {
     builderUI.setDraft({
       kind: "page",
@@ -123,7 +105,6 @@ export const useBridgeAction = ({ dispatch, builderUI }: UseBridgeActionProps) =
     beginDraft,
     updateDraft,
     commitDraft,
-    selectOtherElement,
     beginPageDraft,
     updatePageDraft,
     commitPageDraft,

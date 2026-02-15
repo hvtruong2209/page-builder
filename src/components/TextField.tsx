@@ -23,12 +23,12 @@ export const TextField = ({
   label,
 }: TextFieldProps) => {
   return (
-    <div className="settings-panel__group">
-      {label && <label className="settings-panel__label">{label}</label>}
+    <div className="common-field__group">
+      {label && <label className="common-field__label">{label}</label>}
 
       {type === "textarea" ? (
         <textarea
-          className={`settings-panel__textarea ${className}`}
+          className={`common-field__textarea ${className}`}
           value={value}
           onChange={(e) => onChange?.(e.target.value)}
           onFocus={onChangeStart}
@@ -39,7 +39,7 @@ export const TextField = ({
       ) : (
         <input
           type="text"
-          className={`settings-panel__input ${className}`}
+          className={`common-field__input ${className}`}
           value={value}
           onChange={(e) => onChange?.(e.target.value)}
           onFocus={onChangeStart}

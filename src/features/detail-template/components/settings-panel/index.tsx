@@ -1,6 +1,6 @@
 import "./index.css";
 
-import { CommonButton } from "../../../../components/Button";
+import { CommonButton } from "../../../../components";
 import type {
   HeadingElement,
   ImageElement,

@@ -5,6 +5,7 @@ import { SpacingControls } from "../../../../components/SpacingControls";
 import { TextField } from "../../../../components/TextField";
 import { ALIGNMENT_OPTIONS, DEFAULT_SPACING } from "../../../../constants/variable";
 import { useSettingsDraft } from "./useSettingsDraft";
+import { UploadImage } from "../../../../components/UploadImage";
 
 export const SettingImage = ({
   selectedElement,
@@ -17,10 +18,16 @@ export const SettingImage = ({
 
   return (
     <>
+      <UploadImage
+        el={el}
+        onElementChange={(changes) => updateElement(el.id, changes)}
+        onChangeStart={() => beginDraft(el.id)}
+        onChange={(value) => updateDraft({ src: value })}
+        onChangeEnd={() => commitDraft()}
+      />
       <TextField
         label="Alt Text"
         type="text"
-        className="settings-panel__input"
         value={el.alt}
         onChangeStart={() => beginDraft(el.id)}
         onChange={(value) => updateDraft({ alt: value })}
@@ -28,7 +35,6 @@ export const SettingImage = ({
       />
       <CommonSlider
         label="Width (%)"
-        className="settings-panel__range"
         min={10}
         max={100}
         value={el.width}
@@ -39,7 +45,6 @@ export const SettingImage = ({
       />
       <CommonSelect
         label="Alignment"
-        className="settings-panel__select"
         value={el.alignment}
         onChange={(alignment) => updateElement(el.id, { alignment: alignment })}
         options={ALIGNMENT_OPTIONS}

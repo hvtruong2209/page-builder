@@ -16,7 +16,6 @@ export const BuilderUIActionsContext = createContext<{
   beginDraft: (id: string) => void;
   updateDraft: (changes: Partial<TemplateElement>) => void;
   commitDraft: () => void;
-  selectOtherElement: (id: string | null) => void;
   beginPageDraft: () => void;
   updatePageDraft: (changes: Partial<{ [key: string]: string | number }>) => void;
   commitPageDraft: () => void;

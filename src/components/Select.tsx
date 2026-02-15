@@ -6,7 +6,6 @@ interface Option<T extends string> {
 interface CommonSelectProps<T extends string> {
   value: T;
   options: Option<T>[];
-  className?: string;
   label?: string;
   onChange: (value: T) => void;
 }
@@ -15,13 +14,16 @@ export const CommonSelect = <T extends string>({
   value,
   options,
   onChange,
-  className,
   label,
 }: CommonSelectProps<T>) => {
   return (
-    <div className="settings-panel__group">
-      {!!label && <label className="settings-panel__label">{label}</label>}
-      <select className={className} value={value} onChange={(e) => onChange(e.target.value as T)}>
+    <div className="common-field__group">
+      {!!label && <label className="common-field__label">{label}</label>}
+      <select
+        className="common-field__select"
+        value={value}
+        onChange={(e) => onChange(e.target.value as T)}
+      >
         {options.map((opt) => (
           <option key={opt.value} value={opt.value}>
             {opt.label}

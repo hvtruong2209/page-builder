@@ -1,4 +1,4 @@
-import { CommonButton } from "../../../../components/Button";
+import { CommonButton } from "../../../../components";
 import { CommonColorInput } from "../../../../components/ColorInput";
 import { CommonSlider } from "../../../../components/Slider";
 import { SpacingControls } from "../../../../components/SpacingControls";
@@ -24,7 +24,6 @@ export const SettingSection = ({
       />
       <CommonSlider
         label="Gap"
-        className="settings-panel__range"
         min={0}
         max={64}
         value={el.gap}
@@ -35,7 +34,6 @@ export const SettingSection = ({
       />
       <CommonSlider
         label="Border Radius"
-        className="settings-panel__range"
         min={0}
         max={32}
         value={el.borderRadius}
@@ -46,7 +44,6 @@ export const SettingSection = ({
       />
       <CommonColorInput
         label="Background Color"
-        className="settings-panel__color-input"
         value={el.backgroundColor}
         onChangeEnd={() => commitDraft()}
         onChange={(value) => updateDraft({ backgroundColor: value })}
@@ -63,7 +60,7 @@ export const SettingSection = ({
         onChangeEnd={() => commitDraft()}
       />
       <div className="settings-panel__section-children">
-        <label className="settings-panel__label">Children ({el.children.length} elements)</label>
+        <label className="common-field__label">Children ({el.children.length} elements)</label>
         <p className="settings-panel__hint">
           Click on child elements in the preview to edit them individually.
         </p>

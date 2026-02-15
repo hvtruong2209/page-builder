@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import { exportToHtml } from "../../services/exportService.ts";
-import { CommonButton } from "../../../../components/Button.tsx";
+import { CommonButton } from "../../../../components/index.tsx";
 import { useBuilderState } from "../../hooks/useBuilderState.ts";
 import { useBuilderActions } from "../../hooks/useBuilderActions.ts";
 import { useBuilderUIActions } from "../../hooks/useBuilderUIActions.ts";

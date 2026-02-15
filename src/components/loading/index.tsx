@@ -1,3 +1,5 @@
+import "./index.css";
+
 export const LoadingPage = () => {
   return (
     <div className="loading-page">

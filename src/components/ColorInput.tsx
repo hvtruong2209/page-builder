@@ -3,7 +3,6 @@ import { useDebounced } from "../hooks/useDebounce";
 
 interface CommonColorInputProps {
   value: string;
-  className?: string;
   label?: string;
   onChange: (value: string) => void;
   onChangeStart?: () => void;
@@ -12,7 +11,6 @@ interface CommonColorInputProps {
 
 export const CommonColorInput = ({
   value,
-  className,
   label,
   onChange,
   onChangeStart,
@@ -35,20 +33,20 @@ export const CommonColorInput = ({
   };
 
   return (
-    <div className="settings-panel__group">
-      {label && <label className="settings-panel__label">{label}</label>}
+    <div className="common-field__group">
+      {label && <label className="common-field__label">{label}</label>}
 
-      <div className="settings-panel__color-row">
+      <div className="common-field__color-row">
         <input
           type="color"
           value={value}
-          className={className}
+          className="common-field__color-input"
           onChange={(e) => handleChange(e.target.value)}
         />
 
         <input
           type="text"
-          className="settings-panel__input"
+          className="common-field__input"
           value={value}
           onFocus={() => {
             if (!isEditing.current) {

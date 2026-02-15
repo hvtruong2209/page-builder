@@ -53,8 +53,8 @@ const SpacingInput = ({
 }: SpacingInputProps) => {
   const sides = ["Top", "Right", "Bottom", "Left"];
   return (
-    <div className="settings-panel__group">
-      <label className="settings-panel__label">{label}</label>
+    <div className="common-field__group">
+      <label className="common-field__label">{label}</label>
 
       <div className="settings-panel__spacing-grid">
         {sides.map((side) => (

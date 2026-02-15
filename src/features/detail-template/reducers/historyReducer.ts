@@ -1,3 +1,4 @@
+import { BUILDER_ACTION_TYPE } from "../../../constants/variable";
 import type { Template } from "../../../types/element";
 import { builderReducer, type BuilderAction } from "./builderReducer";
 
@@ -13,7 +14,7 @@ export const historyReducer = (
   state: History<Template>,
   action: BuilderAction,
 ): History<Template> => {
-  if (action.type === "UNDO") {
+  if (action.type === BUILDER_ACTION_TYPE.UNDO) {
     if (!state.past.length) return state;
 
     const previous = state.past[state.past.length - 1];
@@ -25,7 +26,7 @@ export const historyReducer = (
     };
   }
 
-  if (action.type === "REDO") {
+  if (action.type === BUILDER_ACTION_TYPE.REDO) {
     if (!state.future.length) return state;
 
     const next = state.future[0];
@@ -40,7 +41,7 @@ export const historyReducer = (
   // run builder reducer
   const newPresent = builderReducer(state.present, action);
 
-  // IMPORTANT: do not add to history if nothing changed
+  // Do not add to history if nothing changed
   if (newPresent === state.present) return state;
 
   const past = [...state.past, state.present];

@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { createBrowserRouter } from "react-router-dom";
 import { lazy, Suspense } from "react";
-import { LoadingPage } from "../components/Loading";
+import { LoadingPage } from "../components/loading";
 
 const TemplateSelectorPage = lazy(() => import("../pages/template-selector"));
 const DetailTemplate = lazy(() => import("../pages/template-detail"));

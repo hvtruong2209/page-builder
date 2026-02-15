@@ -1,11 +1,11 @@
 import React, { useMemo } from "react";
 import type { Template } from "../../../types/element";
+import { BuilderUIActionsContext, BuilderUIStateContext } from "../contexts/BuilderUIContext";
+import { BuilderStateContext, BuilderActionsContext } from "../contexts/BuilderContext";
 
 import { useBuilderStore } from "../store/useBuilderStore";
-import { BuilderUIActionsContext, BuilderUIStateContext } from "../contexts/BuilderUIContext";
-import { useBuilderUIStore } from "../store/useBuilderUIStore";
 import { useBridgeAction } from "../hooks/useBridgeAction";
-import { BuilderStateContext, BuilderActionsContext } from "../contexts/BuilderContext";
+import { useBuilderUIStore } from "../store/useBuilderUIStore";
 
 export const BuilderProvider = ({
   initial,

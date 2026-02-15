@@ -17,7 +17,6 @@ export const SettingPage = ({ pageSettings }: { pageSettings: PageSettings }) =>
         <h3 className="settings-panel__title">Page Settings</h3>
         <CommonColorInput
           label="Background Color"
-          className="settings-panel__color-input"
           value={pageSettingsDisplay.backgroundColor}
           onChangeStart={() => beginPageDraft()}
           onChange={(value) => updatePageDraft({ backgroundColor: value })}
@@ -25,7 +24,6 @@ export const SettingPage = ({ pageSettings }: { pageSettings: PageSettings }) =>
         />
         <CommonSlider
           label="Content Width"
-          className="settings-panel__range"
           min={600}
           max={1400}
           value={pageSettingsDisplay.contentWidth}

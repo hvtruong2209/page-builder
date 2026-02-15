@@ -27,7 +27,6 @@ export const SettingParagraph = ({
       <TextField
         label="Text"
         type="textarea"
-        className="settings-panel__textarea"
         value={el.text}
         onChangeStart={() => beginDraft(el.id)}
         onChange={(value) => updateDraft({ text: value })}
@@ -35,7 +34,6 @@ export const SettingParagraph = ({
       />
       <CommonSlider
         label="Font size"
-        className="settings-panel__range"
         min={10}
         max={36}
         value={el.fontSize}
@@ -46,7 +44,6 @@ export const SettingParagraph = ({
       />
       <CommonColorInput
         label="Color"
-        className="settings-panel__color-input"
         value={el.color}
         onChangeEnd={() => commitDraft()}
         onChange={(value) => updateDraft({ color: value })}
@@ -54,21 +51,18 @@ export const SettingParagraph = ({
       />
       <CommonSelect
         label="Alignment"
-        className="settings-panel__select"
         value={el.alignment}
         onChange={(alignment) => updateElement(el.id, { alignment: alignment })}
         options={ALIGNMENT_OPTIONS}
       />
       <CommonSelect
         label="Font Weight"
-        className="settings-panel__select"
         value={el.fontWeight}
         onChange={(fontWeight) => updateElement(el.id, { fontWeight: fontWeight as FontWeight })}
         options={FONT_WEIGHT_OPTIONS}
       />
       <CommonSelect
         label="Font Style"
-        className="settings-panel__select"
         value={el.fontStyle}
         onChange={(fontStyle) => updateElement(el.id, { fontStyle: fontStyle as FontStyle })}
         options={FONT_STYLE_OPTIONS}

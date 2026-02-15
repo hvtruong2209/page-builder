@@ -5,7 +5,6 @@ interface CommonSliderProps {
   min?: number;
   max?: number;
   step?: number;
-  className?: string;
   amountText?: string;
   label?: string;
 
@@ -19,7 +18,6 @@ export const CommonSlider = ({
   min = 0,
   max = 100,
   step = 1,
-  className,
   amountText,
   label,
   onChange,
@@ -29,12 +27,12 @@ export const CommonSlider = ({
   const isDragging = useRef(false);
 
   return (
-    <div className="settings-panel__group">
-      {label && <label className="settings-panel__label"> {label}</label>}
-      <div className="settings-panel__range-row">
+    <div className="common-field__group">
+      {label && <label className="common-field__label"> {label}</label>}
+      <div className="common-field__range-row">
         <input
           type="range"
-          className={className}
+          className={"common-field__range"}
           min={min}
           max={max}
           step={step}
@@ -55,7 +53,7 @@ export const CommonSlider = ({
             isDragging.current = false;
           }}
         />
-        {amountText && <span className="settings-panel__range-value">{amountText}</span>}
+        {amountText && <span className="common-field__range-value">{amountText}</span>}
       </div>
     </div>
   );

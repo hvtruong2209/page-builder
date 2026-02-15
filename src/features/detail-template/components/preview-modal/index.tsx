@@ -1,4 +1,4 @@
-import { CommonButton } from "../../../../components/Button";
+import { CommonButton } from "../../../../components";
 import { useBuilderState } from "../../hooks/useBuilderState";
 import { PageContent } from "../page-content";
 import "./index.css";

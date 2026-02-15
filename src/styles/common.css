@@ -1,0 +1,73 @@
+/* Common Fields */
+.common-field__group {
+  margin-bottom: 20px;
+}
+
+.common-field__label {
+  display: block;
+  font-size: 13px;
+  font-weight: 500;
+  color: #495057;
+  margin-bottom: 6px;
+}
+
+.common-field__input,
+.common-field__select,
+.common-field__textarea {
+  width: 100%;
+  padding: 8px 10px;
+  font-size: 14px;
+  border: 1px solid #ced4da;
+  border-radius: 6px;
+  outline: none;
+  box-sizing: border-box;
+  transition: border-color 0.15s;
+}
+
+.common-field__input:focus,
+.common-field__select:focus,
+.common-field__textarea:focus {
+  border-color: #4361ee;
+}
+
+/* Textarea */
+.common-field__textarea {
+  min-height: 80px;
+  resize: vertical;
+  font-family: inherit;
+}
+
+/* Color Input */
+.common-field__color-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.common-field__color-input {
+  width: 40px;
+  height: 36px;
+  border: 1px solid #ced4da;
+  border-radius: 6px;
+  padding: 2px;
+  cursor: pointer;
+  background: none;
+}
+
+/* Range Input */
+.common-field__range-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.common-field__range {
+  flex: 1;
+}
+
+.common-field__range-value {
+  font-size: 13px;
+  color: #495057;
+  min-width: 50px;
+  text-align: right;
+}
