@@ -1,4 +1,4 @@
-import { CommonButton } from "../../../../components";
+import { CommonButton } from "../../../../components/Button.tsx";
 import { useBuilderState } from "../../hooks/useBuilderState";
 import { PageContent } from "../page-content";
 import "./index.css";

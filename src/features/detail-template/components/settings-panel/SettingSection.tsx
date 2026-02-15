@@ -1,4 +1,4 @@
-import { CommonButton } from "../../../../components";
+import { CommonButton } from "../../../../components/Button.tsx";
 import { CommonColorInput } from "../../../../components/ColorInput";
 import { CommonSlider } from "../../../../components/Slider";
 import { SpacingControls } from "../../../../components/SpacingControls";

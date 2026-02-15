@@ -56,22 +56,25 @@ const SpacingInput = ({
     <div className="common-field__group">
       <label className="common-field__label">{label}</label>
 
-      <div className="settings-panel__spacing-grid">
+      <div className="common-field__spacing-grid">
         {sides.map((side) => (
-          <div key={side} className="settings-panel__spacing-item">
-            <label className="settings-panel__spacing-label">{side}</label>
+          <div key={side} className="common-field__spacing-item">
+            <label className="common-field__spacing-label">{side}</label>
             <input
               type="number"
-              className="settings-panel__spacing-input"
+              className="common-field__spacing-input"
               min={label === "Margin" ? -200 : 0}
               max={200}
               value={value[side.toLowerCase() as keyof Spacing]}
-              onChange={(e) =>
-                onChange?.({
-                  ...value,
-                  [side.toLowerCase() as keyof Spacing]: Number(e.target.value),
-                })
-              }
+              onChange={(e) => {
+                const val = e.target.value;
+                if (/^-?\d*$/.test(val)) {
+                  onChange?.({
+                    ...value,
+                    [side.toLowerCase() as keyof Spacing]: Number(e.target.value),
+                  });
+                }
+              }}
               onFocus={onChangeStart}
               onBlur={onChangeEnd}
               onKeyDown={(e) => {

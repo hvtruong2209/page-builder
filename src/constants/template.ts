@@ -15,7 +15,7 @@ export const configTemplates: Template[] = [
       {
         id: "heading-1",
         type: "heading",
-        text: "Welcome to Our Product",
+        text: "Welcome to My Product",
         fontSize: 48,
         fontWeight: "bold",
         fontStyle: "normal",

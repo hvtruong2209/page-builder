@@ -22,13 +22,6 @@ export const FONT_STYLE_OPTIONS: { label: string; value: string }[] = [
 
 export const DEFAULT_SPACING: Spacing = { top: 0, right: 0, bottom: 0, left: 0 };
 
-export const ELEMENT_TYPE = {
-  HEADING: "heading",
-  PARAGRAPH: "paragraph",
-  IMAGE: "image",
-  SECTION: "section",
-} as const;
-
 export const LAYOUT_OPTIONS = {
   SINGLE_COLUMN: "single-column",
   TWO_COLUMN: "two-column",
@@ -42,4 +35,11 @@ export const BUILDER_ACTION_TYPE = {
   UPDATE_ELEMENT: "UPDATE_ELEMENT",
   UNDO: "UNDO",
   REDO: "REDO",
+} as const;
+
+export const ELEMENT_TYPE = {
+  HEADING: "heading",
+  PARAGRAPH: "paragraph",
+  IMAGE: "image",
+  SECTION: "section",
 } as const;

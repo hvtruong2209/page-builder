@@ -16,8 +16,8 @@ export const UploadImage = ({
   return (
     <div className="common-field__group">
       <label className="common-field__label">Image</label>
-      <div className="settings-panel__upload-row">
-        <label className="settings-panel__upload-btn">
+      <div className="common-field__upload-row">
+        <label className="common-field__upload-btn">
           🗂️ Upload
           <input
             type="file"
@@ -28,11 +28,12 @@ export const UploadImage = ({
               if (!file) return;
               const reader = new FileReader();
               reader.onload = () => onElementChange({ ...el, src: reader.result as string });
+              e.target.value = "";
               reader.readAsDataURL(file);
             }}
           />
         </label>
-        <span className="settings-panel__upload-name">
+        <span className="common-field__upload-name">
           {el.src.startsWith("data:") ? "Uploaded ✓" : "No file"}
         </span>
       </div>

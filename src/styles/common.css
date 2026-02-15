@@ -71,3 +71,65 @@
   min-width: 50px;
   text-align: right;
 }
+
+/* Margin Input */
+.common-field__spacing-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 6px;
+}
+.common-field__spacing-item {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+.common-field__spacing-label {
+  font-size: 11px;
+  color: #6c757d;
+  font-weight: 500;
+}
+.common-field__spacing-input {
+  width: 100%;
+  padding: 6px 4px;
+  font-size: 13px;
+  text-align: center;
+  border: 1px solid #ced4da;
+  border-radius: 6px;
+  outline: none;
+  box-sizing: border-box;
+  transition: border-color 0.15s;
+}
+.common-field__spacing-input:focus {
+  border-color: #4361ee;
+}
+
+/* Upload Input */
+.common-field__upload-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 8px;
+}
+
+.common-field__upload-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 7px 14px;
+  font-size: 13px;
+  font-weight: 500;
+  color: #fff;
+  background: #4361ee;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background 0.15s;
+}
+
+.common-field__upload-btn:hover {
+  background: #3a56d4;
+}
+
+.common-field__upload-name {
+  font-size: 13px;
+  color: #6c757d;
+}
