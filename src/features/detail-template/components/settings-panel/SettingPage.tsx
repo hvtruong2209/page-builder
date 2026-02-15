@@ -1,10 +1,12 @@
+import type { PageSettings } from "../../../../types/element";
 import { CommonColorInput } from "../../../../components/ColorInput";
 import { CommonSlider } from "../../../../components/Slider";
-import type { PageSettings } from "../../../../types/element";
-import { useBuilderUI } from "../../hooks/useBuilderUI";
+import { useBuilderUIActions } from "../../hooks/useBuilderUIActions";
+import { useBuilderUIState } from "../../hooks/useBuilderUIState";
 
 export const SettingPage = ({ pageSettings }: { pageSettings: PageSettings }) => {
-  const { draft, beginPageDraft, updatePageDraft, commitPageDraft } = useBuilderUI();
+  const { beginPageDraft, updatePageDraft, commitPageDraft } = useBuilderUIActions();
+  const { draft } = useBuilderUIState();
 
   const pageSettingsDisplay =
     draft && draft.kind === "page" ? { ...pageSettings, ...draft.changes } : pageSettings;

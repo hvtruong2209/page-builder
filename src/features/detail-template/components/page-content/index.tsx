@@ -3,13 +3,16 @@ import type { TemplateElement, SectionElement } from "../../../../types/element"
 import { spacingStyle } from "../../services/elementService";
 import { usePageContent } from "./usePageContent";
 import { useBuilderState } from "../../hooks/useBuilderState";
-import { useBuilderUI } from "../../hooks/useBuilderUI";
 import { ELEMENT_TYPE, LAYOUT_OPTIONS } from "../../../../constants/variable";
+import { useBuilderUIActions } from "../../hooks/useBuilderUIActions";
+import { useBuilderUIState } from "../../hooks/useBuilderUIState";
 
 // ============= The main PageContent component =============
 export const PageContent = ({ isPreview }: { isPreview?: boolean }) => {
-  const template = useBuilderState();
-  const { setSelectedElementId, draft } = useBuilderUI();
+  const { template } = useBuilderState();
+  const { draft } = useBuilderUIState();
+  const { setSelectedElementId } = useBuilderUIActions();
+
   const { elements, pageSettings, layout } = template;
   const pageSettingsDisplay =
     draft && draft.kind === "page" ? { ...pageSettings, ...draft.changes } : pageSettings;

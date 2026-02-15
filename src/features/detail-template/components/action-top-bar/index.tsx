@@ -1,19 +1,15 @@
 import { Link } from "react-router-dom";
 import { exportToHtml } from "../../services/exportService.ts";
 import { CommonButton } from "../../../../components/Button.tsx";
-import { useBuilderHistory } from "../../hooks/useBuilderHistory.ts";
 import { useBuilderState } from "../../hooks/useBuilderState.ts";
-import { useBuilderUI } from "../../hooks/useBuilderUI.ts";
+import { useBuilderActions } from "../../hooks/useBuilderActions.ts";
+import { useBuilderUIActions } from "../../hooks/useBuilderUIActions.ts";
 
 // ============= The ActionTopBar component =============
 export const ActionTopBar = () => {
-  const template = useBuilderState();
-  const { undo, redo, canUndo, canRedo } = useBuilderHistory();
-  const { setShowPreview } = useBuilderUI();
-
-  const handleExport = () => {
-    exportToHtml(template);
-  };
+  const { template, canUndo, canRedo } = useBuilderState();
+  const { undo, redo } = useBuilderActions();
+  const { setShowPreview } = useBuilderUIActions();
 
   return (
     <div className="builder__topbar">
@@ -43,7 +39,13 @@ export const ActionTopBar = () => {
           onClick={() => setShowPreview(true)}
           text="👁 Preview"
         />
-        <CommonButton className="builder__export-btn" onClick={handleExport} text="Export HTML" />
+        <CommonButton
+          className="builder__export-btn"
+          onClick={() => {
+            exportToHtml(template);
+          }}
+          text="Export HTML"
+        />
       </div>
     </div>
   );

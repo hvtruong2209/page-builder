@@ -4,7 +4,7 @@ import { PageContent } from "../page-content";
 import "./index.css";
 
 export const PreviewModal = ({ onClose }: { onClose: () => void }) => {
-  const template = useBuilderState();
+  const { template } = useBuilderState();
 
   return (
     <div className="preview-modal__overlay">

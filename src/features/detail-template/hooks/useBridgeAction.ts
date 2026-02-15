@@ -17,17 +17,6 @@ interface UseBridgeActionProps {
 }
 
 export const useBridgeAction = ({ dispatch, builderUI }: UseBridgeActionProps) => {
-  const beginDraft = useCallback(
-    (id: string) => {
-      builderUI.setDraft({
-        kind: "element",
-        id,
-        changes: {},
-      });
-    },
-    [builderUI],
-  );
-
   // only update the draft state, do not commit to reducer yet
   const updateDraft = useCallback(
     (changes: Partial<TemplateElement>) => {
@@ -62,6 +51,20 @@ export const useBridgeAction = ({ dispatch, builderUI }: UseBridgeActionProps) =
 
     builderUI.setDraft(null);
   }, [builderUI, dispatch]);
+
+  const beginDraft = useCallback(
+    (id: string) => {
+      // If there's already a draft for another element, commit it before starting new draft
+      commitDraft();
+
+      builderUI.setDraft({
+        kind: "element",
+        id,
+        changes: {},
+      });
+    },
+    [builderUI, commitDraft],
+  );
 
   const selectOtherElement = useCallback(
     (id: string | null) => {

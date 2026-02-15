@@ -172,30 +172,6 @@
   margin-top: 8px;
 }
 
-.settings-panel__swap-btn {
-  width: 100%;
-  padding: 10px 16px;
-  background: #4361ee;
-  color: #fff;
-  border: none;
-  border-radius: 6px;
-  font-size: 14px;
-  font-weight: 600;
-  cursor: pointer;
-  transition: background 0.15s;
-}
-.settings-panel__swap-btn:hover {
-  background: #3a56d4;
-}
-.settings-panel__hint {
-  font-size: 12px;
-  color: #999;
-  margin-top: 4px;
-}
-.settings-panel__section-children {
-  margin-top: 8px;
-}
-
 /* Margin */
 .settings-panel__spacing-grid {
   display: grid;

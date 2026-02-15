@@ -1,15 +1,11 @@
-import React from "react";
+import React, { useMemo } from "react";
 import type { Template } from "../../../types/element";
 
 import { useBuilderStore } from "../store/useBuilderStore";
-import { BuilderUIContext } from "../contexts/BuilderUIContext";
+import { BuilderUIActionsContext, BuilderUIStateContext } from "../contexts/BuilderUIContext";
 import { useBuilderUIStore } from "../store/useBuilderUIStore";
 import { useBridgeAction } from "../hooks/useBridgeAction";
-import {
-  BuilderStateContext,
-  BuilderDispatchContext,
-  BuilderHistoryContext,
-} from "../contexts/BuilderContext";
+import { BuilderStateContext, BuilderActionsContext } from "../contexts/BuilderContext";
 
 export const BuilderProvider = ({
   initial,
@@ -22,22 +18,54 @@ export const BuilderProvider = ({
   const builderUI = useBuilderUIStore();
   const bridgeActions = useBridgeAction({ dispatch: builder.dispatch, builderUI });
 
+  const builderState = useMemo(
+    () => ({
+      template: builder.template,
+      canUndo: builder.canUndo,
+      canRedo: builder.canRedo,
+    }),
+    [builder.template, builder.canUndo, builder.canRedo],
+  );
+
+  // Memoize stable actions
+  const builderActions = useMemo(
+    () => ({
+      dispatch: builder.dispatch,
+      undo: builder.undo,
+      redo: builder.redo,
+    }),
+    [builder.dispatch, builder.undo, builder.redo],
+  );
+
+  const uiState = useMemo(
+    () => ({
+      selectedElementId: builderUI.selectedElementId,
+      showPreview: builderUI.showPreview,
+      draft: builderUI.draft,
+    }),
+    [builderUI.selectedElementId, builderUI.showPreview, builderUI.draft],
+  );
+
+  // Memoize stable actions
+  const uiActions = useMemo(
+    () => ({
+      setSelectedElementId: builderUI.setSelectedElementId,
+      setShowPreview: builderUI.setShowPreview,
+      setDraft: builderUI.setDraft,
+      ...bridgeActions,
+    }),
+    [builderUI.setSelectedElementId, builderUI.setShowPreview, builderUI.setDraft, bridgeActions],
+  );
+
   return (
-    <BuilderStateContext.Provider value={builder.template}>
-      <BuilderDispatchContext.Provider value={builder.dispatch}>
-        <BuilderHistoryContext.Provider
-          value={{
-            undo: builder.undo,
-            redo: builder.redo,
-            canUndo: builder.canUndo,
-            canRedo: builder.canRedo,
-          }}
-        >
-          <BuilderUIContext.Provider value={{ ...builderUI, ...bridgeActions }}>
+    <BuilderStateContext.Provider value={builderState}>
+      <BuilderActionsContext.Provider value={builderActions}>
+        <BuilderUIStateContext.Provider value={uiState}>
+          <BuilderUIActionsContext.Provider value={uiActions}>
             {children}
-          </BuilderUIContext.Provider>
-        </BuilderHistoryContext.Provider>
-      </BuilderDispatchContext.Provider>
+          </BuilderUIActionsContext.Provider>
+        </BuilderUIStateContext.Provider>
+      </BuilderActionsContext.Provider>
     </BuilderStateContext.Provider>
   );
 };

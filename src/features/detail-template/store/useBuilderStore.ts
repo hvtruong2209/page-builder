@@ -12,10 +12,8 @@ export const useBuilderStore = (initial: Template) => {
   return {
     template: state.present,
     dispatch,
-
     undo: () => dispatch({ type: "UNDO" }),
     redo: () => dispatch({ type: "REDO" }),
-
     canUndo: state.past.length > 0,
     canRedo: state.future.length > 0,
   };

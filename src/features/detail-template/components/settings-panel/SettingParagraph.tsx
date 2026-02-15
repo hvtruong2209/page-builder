@@ -11,7 +11,7 @@ import {
 } from "../../../../constants/variable";
 import type { ParagraphElement } from "../../../../types/element";
 import type { FontStyle, FontWeight } from "../../../../types/styles";
-import { useBuilderUI } from "../../hooks/useBuilderUI";
+import { useSettingsDraft } from "./useSettingsDraft";
 
 export const SettingParagraph = ({
   selectedElement,
@@ -20,11 +20,7 @@ export const SettingParagraph = ({
   selectedElement: ParagraphElement;
   updateElement: (id: string, changes: Partial<ParagraphElement>) => void;
 }) => {
-  const { draft, updateDraft, beginDraft, commitDraft } = useBuilderUI();
-  const el =
-    draft && draft.kind === "element" && selectedElement && draft.id === selectedElement.id
-      ? { ...selectedElement, ...draft.changes }
-      : selectedElement;
+  const { el, updateDraft, beginDraft, commitDraft } = useSettingsDraft({ selectedElement });
 
   return (
     <>

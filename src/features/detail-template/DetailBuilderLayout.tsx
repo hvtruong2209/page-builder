@@ -3,10 +3,12 @@ import { ActionTopBar } from "./components/action-top-bar";
 import { PageContent } from "./components/page-content";
 import { PreviewModal } from "./components/preview-modal";
 import SettingsPanel from "./components/settings-panel";
-import { useBuilderUI } from "./hooks/useBuilderUI";
+import { useBuilderUIActions } from "./hooks/useBuilderUIActions";
+import { useBuilderUIState } from "./hooks/useBuilderUIState";
 
 const DetailBuilderLayout = () => {
-  const { showPreview, setShowPreview } = useBuilderUI();
+  const { showPreview } = useBuilderUIState();
+  const { setShowPreview } = useBuilderUIActions();
 
   return (
     <div className="builder">

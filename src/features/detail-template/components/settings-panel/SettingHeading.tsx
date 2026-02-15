@@ -11,8 +11,7 @@ import {
 } from "../../../../constants/variable";
 import type { HeadingElement } from "../../../../types/element";
 import type { FontStyle, FontWeight } from "../../../../types/styles";
-
-import { useBuilderUI } from "../../hooks/useBuilderUI";
+import { useSettingsDraft } from "./useSettingsDraft";
 
 export const SettingHeading = ({
   selectedElement,
@@ -21,11 +20,7 @@ export const SettingHeading = ({
   selectedElement: HeadingElement;
   updateElement: (id: string, changes: Partial<HeadingElement>) => void;
 }) => {
-  const { draft, updateDraft, beginDraft, commitDraft } = useBuilderUI();
-  const el =
-    draft && draft.kind === "element" && selectedElement && draft.id === selectedElement.id
-      ? { ...selectedElement, ...draft.changes }
-      : selectedElement;
+  const { el, updateDraft, beginDraft, commitDraft } = useSettingsDraft({ selectedElement });
 
   return (
     <>

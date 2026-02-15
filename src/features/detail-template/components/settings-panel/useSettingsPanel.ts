@@ -5,18 +5,17 @@ import type {
   ImageElement,
   SectionElement,
 } from "../../../../types/element";
-import { useBuilderDispatch } from "../../hooks/useBuilderDispatch";
+import { useBuilderActions } from "../../hooks/useBuilderActions";
 import { useBuilderState } from "../../hooks/useBuilderState";
-import { useBuilderUI } from "../../hooks/useBuilderUI";
+import { useBuilderUIState } from "../../hooks/useBuilderUIState";
 import { findElement } from "../../services/elementService";
 
 export const useSettingsPanel = () => {
-  const template = useBuilderState();
-  const dispatch = useBuilderDispatch();
-  const { selectedElementId } = useBuilderUI();
+  const { dispatch } = useBuilderActions();
+  const { template } = useBuilderState();
+  const { selectedElementId } = useBuilderUIState();
 
   const { pageSettings } = template;
-
   const selectedElement = selectedElementId
     ? findElement(template.elements, selectedElementId)
     : null;

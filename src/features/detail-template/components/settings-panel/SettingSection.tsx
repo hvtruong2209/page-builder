@@ -4,7 +4,7 @@ import { CommonSlider } from "../../../../components/Slider";
 import { SpacingControls } from "../../../../components/SpacingControls";
 import { DEFAULT_SPACING } from "../../../../constants/variable";
 import type { SectionElement } from "../../../../types/element";
-import { useBuilderUI } from "../../hooks/useBuilderUI";
+import { useSettingsDraft } from "./useSettingsDraft";
 
 export const SettingSection = ({
   selectedElement,
@@ -13,11 +13,7 @@ export const SettingSection = ({
   selectedElement: SectionElement;
   updateElement: (id: string, changes: Partial<SectionElement>) => void;
 }) => {
-  const { draft, updateDraft, beginDraft, commitDraft } = useBuilderUI();
-  const el =
-    draft && draft.kind === "element" && selectedElement && draft.id === selectedElement.id
-      ? { ...selectedElement, ...draft.changes }
-      : selectedElement;
+  const { el, updateDraft, beginDraft, commitDraft } = useSettingsDraft({ selectedElement });
 
   return (
     <>

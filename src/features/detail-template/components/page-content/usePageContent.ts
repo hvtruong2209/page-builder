@@ -1,12 +1,14 @@
 import { useRef } from "react";
 import type { TemplateElement } from "../../../../types/element";
-import { useBuilderDispatch } from "../../hooks/useBuilderDispatch";
-import { useBuilderUI } from "../../hooks/useBuilderUI";
 import { BUILDER_ACTION_TYPE, ELEMENT_TYPE } from "../../../../constants/variable";
+import { useBuilderActions } from "../../hooks/useBuilderActions";
+import { useBuilderUIState } from "../../hooks/useBuilderUIState";
+import { useBuilderUIActions } from "../../hooks/useBuilderUIActions";
 
 export const usePageContent = (el: TemplateElement) => {
-  const dispatch = useBuilderDispatch();
-  const { selectedElementId, setSelectedElementId, draft } = useBuilderUI();
+  const { dispatch } = useBuilderActions();
+  const { selectedElementId, draft } = useBuilderUIState();
+  const { setSelectedElementId } = useBuilderUIActions();
 
   const editingRef = useRef<HTMLElement | null>(null);
 

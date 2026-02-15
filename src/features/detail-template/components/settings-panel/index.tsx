@@ -28,12 +28,14 @@ const SettingsPanel = () => {
 
   //  If an element is selected, show element settings
   return (
-    <div className="settings-panel">
-      <div className="settings-panel__header-row">
-        <h3 className="settings-panel__title">Settings</h3>
-        <Actions handleDuplicate={handleDuplicate} handleRemove={handleRemove} />
+    <div className="builder__settings-pane">
+      <div className="settings-panel">
+        <div className="settings-panel__header-row">
+          <h3 className="settings-panel__title">Settings</h3>
+          <Actions handleDuplicate={handleDuplicate} handleRemove={handleRemove} />
+        </div>
+        <FieldConfig selectedElement={selectedElement} updateElement={updateElement} />
       </div>
-      <FieldConfig selectedElement={selectedElement} updateElement={updateElement} />
     </div>
   );
 };
@@ -80,13 +82,13 @@ const FieldConfig = ({
   switch (selectedElement.type) {
     case ELEMENT_TYPE.SECTION:
       return <SettingSection selectedElement={selectedElement} updateElement={updateElement} />;
-    case ELEMENT_TYPE.HEADING: {
-      return <SettingHeading selectedElement={selectedElement} updateElement={updateElement} />;
-    }
     case ELEMENT_TYPE.PARAGRAPH:
       return <SettingParagraph selectedElement={selectedElement} updateElement={updateElement} />;
     case ELEMENT_TYPE.IMAGE:
       return <SettingImage selectedElement={selectedElement} updateElement={updateElement} />;
+    case ELEMENT_TYPE.HEADING: {
+      return <SettingHeading selectedElement={selectedElement} updateElement={updateElement} />;
+    }
     default:
       return null;
   }

@@ -1,10 +1,10 @@
+import type { ImageElement } from "../../../../types/element";
 import { CommonSelect } from "../../../../components/Select";
 import { CommonSlider } from "../../../../components/Slider";
 import { SpacingControls } from "../../../../components/SpacingControls";
 import { TextField } from "../../../../components/TextField";
 import { ALIGNMENT_OPTIONS, DEFAULT_SPACING } from "../../../../constants/variable";
-import type { ImageElement } from "../../../../types/element";
-import { useBuilderUI } from "../../hooks/useBuilderUI";
+import { useSettingsDraft } from "./useSettingsDraft";
 
 export const SettingImage = ({
   selectedElement,
@@ -13,11 +13,7 @@ export const SettingImage = ({
   selectedElement: ImageElement;
   updateElement: (id: string, changes: Partial<ImageElement>) => void;
 }) => {
-  const { draft, updateDraft, beginDraft, commitDraft } = useBuilderUI();
-  const el =
-    draft && draft.kind === "element" && selectedElement && draft.id === selectedElement.id
-      ? { ...selectedElement, ...draft.changes }
-      : selectedElement;
+  const { el, updateDraft, beginDraft, commitDraft } = useSettingsDraft({ selectedElement });
 
   return (
     <>
