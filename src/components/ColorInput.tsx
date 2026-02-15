@@ -6,7 +6,7 @@ interface CommonColorInputProps {
   label?: string;
   onChange: (value: string) => void;
   onChangeStart?: () => void;
-  onChangeEnd?: (value: string) => void;
+  onChangeEnd?: () => void;
 }
 
 export const CommonColorInput = ({
@@ -18,8 +18,8 @@ export const CommonColorInput = ({
 }: CommonColorInputProps) => {
   const isEditing = useRef(false);
 
-  const debouncedChangeEnd = useDebounced<string>((val: string) => {
-    onChangeEnd?.(val);
+  const debouncedChangeEnd = useDebounced<string>(() => {
+    onChangeEnd?.();
     isEditing.current = false;
   }, 300);
 
@@ -41,9 +41,10 @@ export const CommonColorInput = ({
           type="color"
           value={value}
           className="common-field__color-input"
-          onChange={(e) => handleChange(e.target.value)}
+          onChange={(e) => {
+            handleChange(e.target.value);
+          }}
         />
-
         <input
           type="text"
           className="common-field__input"
@@ -54,7 +55,13 @@ export const CommonColorInput = ({
               onChangeStart?.();
             }
           }}
-          onChange={(e) => handleChange(e.target.value)}
+          onChange={(e) => onChange(e.target.value)}
+          onBlur={() => {
+            if (isEditing.current) {
+              isEditing.current = false;
+              onChangeEnd?.();
+            }
+          }}
         />
       </div>
     </div>

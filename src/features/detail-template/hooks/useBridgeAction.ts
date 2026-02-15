@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { useCallback } from "react";
+import { useCallback, useRef } from "react";
 import type { PageSettings, TemplateElement } from "../../../types/element";
 import type { Draft } from "../../../types/element";
 import { BUILDER_ACTION_TYPE } from "../../../constants/variable";
@@ -17,38 +17,44 @@ interface UseBridgeActionProps {
 }
 
 export const useBridgeAction = ({ dispatch, builderUI }: UseBridgeActionProps) => {
-  // only update the draft state, do not commit to reducer yet
+  // Ref to keep track of the current draft state, allowing us to access the latest draft in callbacks without worrying about stale closures
+  // Avoid issues with stale closures in callbacks that depend on the draft state
+  const draftRef = useRef<Draft | null>(builderUI.draft);
+
+  // ======== Element draft actions ========
   const updateDraft = useCallback(
     (changes: Partial<TemplateElement>) => {
-      builderUI.setDraft((prev: Draft | null) => {
-        if (!prev || prev.kind !== "element") return prev;
+      const prev = draftRef.current;
+      if (!prev || prev.kind !== "element") return;
+      const newDraft = {
+        ...prev,
+        changes: {
+          ...prev.changes,
+          ...changes,
+        },
+      };
 
-        return {
-          ...prev,
-          kind: "element",
-          changes: {
-            ...prev.changes,
-            ...changes,
-          },
-        };
-      });
+      draftRef.current = newDraft;
+      builderUI.setDraft(newDraft);
     },
     [builderUI],
   );
 
   const commitDraft = useCallback(() => {
-    if (!builderUI.draft) return;
+    const draft = draftRef.current;
 
-    if (builderUI.draft.kind === "element") {
+    if (!draft) return;
+
+    if (draft.kind === "element") {
       dispatch({
         type: BUILDER_ACTION_TYPE.UPDATE_ELEMENT,
         payload: {
-          id: builderUI.draft.id,
-          changes: builderUI.draft.changes,
+          id: draft.id,
+          changes: draft.changes,
         },
       });
     }
-
+    draftRef.current = null;
     builderUI.setDraft(null);
   }, [builderUI, dispatch]);
 
@@ -57,47 +63,59 @@ export const useBridgeAction = ({ dispatch, builderUI }: UseBridgeActionProps) =
       // If there's already a draft for another element, commit it before starting new draft
       commitDraft();
 
-      builderUI.setDraft({
+      const newDraft: Draft = {
         kind: "element",
         id,
         changes: {},
-      });
+      };
+
+      draftRef.current = newDraft;
+      builderUI.setDraft(newDraft);
     },
     [builderUI, commitDraft],
   );
 
+  // ======== Page draft actions ========
   const beginPageDraft = useCallback(() => {
-    builderUI.setDraft({
+    const newDraft: Draft = {
       kind: "page",
       changes: {},
-    });
+    };
+    draftRef.current = newDraft;
+    builderUI.setDraft(newDraft);
   }, [builderUI]);
 
   const updatePageDraft = useCallback(
     (changes: Partial<PageSettings>) => {
-      builderUI.setDraft((prev: Draft | null) => {
-        if (!prev || prev.kind !== "page") return prev;
+      const prev = draftRef.current;
 
-        return {
-          ...prev,
-          changes: {
-            ...prev.changes,
-            ...changes,
-          },
-        };
-      });
+      if (!prev || prev.kind !== "page") return;
+
+      const newDraft: Draft = {
+        ...prev,
+        changes: {
+          ...prev.changes,
+          ...changes,
+        },
+      };
+
+      draftRef.current = newDraft;
+      builderUI.setDraft(newDraft);
     },
     [builderUI],
   );
 
   const commitPageDraft = useCallback(() => {
-    if (!builderUI.draft || builderUI.draft.kind !== "page") return;
+    const draft = draftRef.current;
+
+    if (!draft || draft.kind !== "page") return;
 
     dispatch({
       type: BUILDER_ACTION_TYPE.UPDATE_PAGE_SETTINGS,
-      payload: builderUI.draft.changes,
+      payload: draft.changes,
     });
 
+    draftRef.current = null;
     builderUI.setDraft(null);
   }, [builderUI, dispatch]);
 
