@@ -1,58 +1,62 @@
 import { useRef } from "react";
+import { useDebounced } from "../hooks/useDebounce";
 
 interface CommonColorInputProps {
   value: string;
-  onChange: (value: string) => void;
-
-  /** draft lifecycle */
-  onChangeStart?: () => void;
-  onChangeEnd?: (value: string) => void;
-
   className?: string;
   label?: string;
+  onChange: (value: string) => void;
+  onChangeStart?: () => void;
+  onChangeEnd?: (value: string) => void;
 }
 
 export const CommonColorInput = ({
   value,
+  className,
+  label,
   onChange,
   onChangeStart,
   onChangeEnd,
-  className,
-  label,
 }: CommonColorInputProps) => {
   const isEditing = useRef(false);
+
+  const debouncedChangeEnd = useDebounced<string>((val: string) => {
+    onChangeEnd?.(val);
+    isEditing.current = false;
+  }, 300);
+
+  const handleChange = (val: string) => {
+    if (!isEditing.current) {
+      isEditing.current = true;
+      onChangeStart?.();
+    }
+    onChange(val);
+    debouncedChangeEnd(val);
+  };
 
   return (
     <div className="settings-panel__group">
       {label && <label className="settings-panel__label">{label}</label>}
 
       <div className="settings-panel__color-row">
-        {/* color picker */}
         <input
           type="color"
           value={value}
           className={className}
-          onChange={(e) => {
-            const val = e.target.value;
-            if (!isEditing.current) {
-              isEditing.current = true;
-              onChangeStart?.();
-            }
-            onChange(val);
-            // need to improve UX here - color picker doesn't have onBlur or similar event
-            onChangeEnd?.(val);
-            isEditing.current = false;
-          }}
+          onChange={(e) => handleChange(e.target.value)}
         />
 
-        {/* hex input */}
         <input
           type="text"
           className="settings-panel__input"
           value={value}
-          onFocus={onChangeStart}
-          onChange={(e) => onChange(e.target.value)}
-          onBlur={(e) => onChangeEnd?.(e.target.value)}
+          onFocus={() => {
+            if (!isEditing.current) {
+              isEditing.current = true;
+              onChangeStart?.();
+            }
+          }}
+          onChange={(e) => handleChange(e.target.value)}
         />
       </div>
     </div>

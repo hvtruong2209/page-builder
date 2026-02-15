@@ -19,12 +19,12 @@ export const CommonSlider = ({
   min = 0,
   max = 100,
   step = 1,
-  onChange,
-  onChangeStart,
-  onChangeEnd,
   className,
   amountText,
   label,
+  onChange,
+  onChangeStart,
+  onChangeEnd,
 }: CommonSliderProps) => {
   const isDragging = useRef(false);
 

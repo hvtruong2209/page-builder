@@ -76,11 +76,11 @@ export const SettingHeading = ({
         margin={el.margin || DEFAULT_SPACING}
         padding={el.padding || DEFAULT_SPACING}
         onChangeStart={() => beginDraft(el.id)}
+        onChangeEnd={() => commitDraft()}
+        onPaddingChange={(value) => updateDraft({ padding: value })}
         onMarginChange={(value) => {
           updateDraft({ margin: { ...value } });
         }}
-        onPaddingChange={(value) => updateDraft({ padding: value })}
-        onChangeEnd={() => commitDraft()}
       />
     </>
   );

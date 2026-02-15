@@ -6,9 +6,9 @@ interface Option<T extends string> {
 interface CommonSelectProps<T extends string> {
   value: T;
   options: Option<T>[];
-  onChange: (value: T) => void;
   className?: string;
   label?: string;
+  onChange: (value: T) => void;
 }
 
 export const CommonSelect = <T extends string>({

@@ -1,6 +1,6 @@
 import type { Spacing } from "../types/styles";
 
-type Props = {
+type SpacingInputProps = {
   label: string;
   value: Spacing;
 
@@ -44,7 +44,13 @@ export const SpacingControls = ({
   );
 };
 
-export const SpacingInput = ({ label, value, onChangeStart, onChange, onChangeEnd }: Props) => {
+const SpacingInput = ({
+  label,
+  value,
+  onChangeStart,
+  onChange,
+  onChangeEnd,
+}: SpacingInputProps) => {
   const sides = ["Top", "Right", "Bottom", "Left"];
   return (
     <div className="settings-panel__group">

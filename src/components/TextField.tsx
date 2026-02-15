@@ -1,16 +1,14 @@
 interface TextFieldProps {
   value?: string;
-  onChange?: (value: string) => void;
-
-  /** Draft lifecycle */
-  onChangeStart?: () => void;
-  onChangeEnd?: () => void;
-
   type?: "text" | "textarea";
   className?: string;
   placeholder?: string;
   disabled?: boolean;
   label?: string;
+
+  onChange?: (value: string) => void;
+  onChangeStart?: () => void;
+  onChangeEnd?: () => void;
 }
 
 export const TextField = ({
