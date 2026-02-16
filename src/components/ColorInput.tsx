@@ -62,10 +62,6 @@ export const CommonColorInput = ({
       setTextValue(value);
       return;
     }
-    if (textValue === value) {
-      return;
-    }
-
     onChangeEnd?.();
   };
 
