@@ -41,7 +41,6 @@ export const historyReducer = (
   // run builder reducer
   const newPresent = builderReducer(state.present, action);
 
-  // Do not add to history if nothing changed
   if (newPresent === state.present) return state;
 
   const past = [...state.past, state.present];

@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { produce } from "immer";
 import type { PageSettings, TemplateElement, Template } from "../../../types/element";
-import { updateElementDeep } from "../services/elementService";
+import { removeElementTree, updateElementTree } from "../services/elementService";
 import { BUILDER_ACTION_TYPE } from "../../../constants/variable";
 
 export type BuilderAction =
@@ -34,6 +34,7 @@ export type BuilderAction =
   | { type: typeof BUILDER_ACTION_TYPE.UNDO }
   | { type: typeof BUILDER_ACTION_TYPE.REDO };
 
+// Use immer (produce) to handle immutable state updates in the builder reducer
 export const builderReducer = produce((draft: Template, action: BuilderAction) => {
   switch (action.type) {
     case BUILDER_ACTION_TYPE.UPDATE_PAGE_SETTING: {
@@ -64,15 +65,12 @@ export const builderReducer = produce((draft: Template, action: BuilderAction) =
     }
 
     case BUILDER_ACTION_TYPE.DELETE_ELEMENT: {
-      const index = draft.elements.findIndex((el) => el.id === action.payload);
-      if (index !== -1) {
-        draft.elements.splice(index, 1);
-      }
+      removeElementTree(draft.elements, action.payload);
       return;
     }
 
     case BUILDER_ACTION_TYPE.UPDATE_ELEMENT: {
-      draft.elements = updateElementDeep(draft.elements, action.payload.id, action.payload.changes);
+      draft.elements = updateElementTree(draft.elements, action.payload.id, action.payload.changes);
       return;
     }
 

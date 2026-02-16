@@ -46,16 +46,16 @@
   justify-content: center;
 }
 
-.preview-modal__body .page-preview {
+.preview-modal__body .page-content {
   cursor: default;
 }
 
-.preview-modal__body .page-preview__element {
+.preview-modal__body .page-content__element {
   cursor: default;
   border-color: transparent !important;
   box-shadow: none !important;
 }
 
-.preview-modal__body .page-preview__element:hover {
+.preview-modal__body .page-content__element:hover {
   border-color: transparent !important;
 }

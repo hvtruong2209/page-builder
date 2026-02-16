@@ -8,7 +8,7 @@ import type {
 import { useBuilderActions } from "../../hooks/useBuilderActions";
 import { useBuilderState } from "../../hooks/useBuilderState";
 import { useBuilderUIState } from "../../hooks/useBuilderUIState";
-import { findElement } from "../../services/elementService";
+import { duplicateElementTree, findElementTree } from "../../services/elementService";
 
 export const useSettingsPanel = () => {
   const { dispatch } = useBuilderActions();
@@ -17,7 +17,7 @@ export const useSettingsPanel = () => {
 
   const { pageSettings } = template;
   const selectedElement = selectedElementId
-    ? findElement(template.elements, selectedElementId)
+    ? findElementTree(template.elements, selectedElementId)
     : null;
 
   const updateElement = (
@@ -35,10 +35,7 @@ export const useSettingsPanel = () => {
 
   const handleDuplicate = () => {
     if (!selectedElement) return;
-    const newElement = {
-      ...selectedElement,
-      id: `${selectedElement.id}-${crypto.randomUUID()}`,
-    };
+    const newElement = duplicateElementTree(selectedElement);
     dispatch({
       type: BUILDER_ACTION_TYPE.ADD_ELEMENT,
       payload: { element: newElement, afterId: selectedElement.id },

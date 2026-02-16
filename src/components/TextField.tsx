@@ -13,14 +13,14 @@ interface TextFieldProps {
 
 export const TextField = ({
   value = "",
-  onChange,
-  onChangeStart,
-  onChangeEnd,
   type = "text",
   className = "",
   placeholder,
   disabled = false,
   label,
+  onChange,
+  onChangeStart,
+  onChangeEnd,
 }: TextFieldProps) => {
   return (
     <div className="common-field__group">

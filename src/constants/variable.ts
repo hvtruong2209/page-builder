@@ -43,3 +43,10 @@ export const ELEMENT_TYPE = {
   IMAGE: "image",
   SECTION: "section",
 } as const;
+
+export const ELEMENT_NAME_TYPE = {
+  [ELEMENT_TYPE.HEADING]: "Heading",
+  [ELEMENT_TYPE.PARAGRAPH]: "Paragraph",
+  [ELEMENT_TYPE.IMAGE]: "Image",
+  [ELEMENT_TYPE.SECTION]: "Section",
+};

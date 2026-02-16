@@ -39,7 +39,6 @@ export const CommonColorInput = ({
 
     setTextValue(val);
     onChange(val);
-
     debouncedChangeEnd(val);
   };
 
@@ -50,7 +49,6 @@ export const CommonColorInput = ({
       isEditing.current = true;
       onChangeStart?.();
     }
-
     if (isValidHex(val)) {
       onChange(val);
     }
@@ -60,16 +58,10 @@ export const CommonColorInput = ({
     if (!isEditing.current) return;
 
     isEditing.current = false;
-
     if (!isValidHex(textValue)) {
       setTextValue(value);
       return;
     }
-
-    if (textValue === value) {
-      return;
-    }
-
     onChangeEnd?.();
   };
 

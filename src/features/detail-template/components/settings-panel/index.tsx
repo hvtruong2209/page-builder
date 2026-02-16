@@ -14,7 +14,7 @@ import { SettingParagraph } from "./SettingParagraph";
 import { SettingSection } from "./SettingSection";
 
 import { useSettingsPanel } from "./useSettingsPanel";
-import { ELEMENT_TYPE } from "../../../../constants/variable";
+import { ELEMENT_NAME_TYPE, ELEMENT_TYPE } from "../../../../constants/variable";
 
 // ============= Main settings panel component =============
 const SettingsPanel = () => {
@@ -31,7 +31,7 @@ const SettingsPanel = () => {
     <div className="builder__settings-pane">
       <div className="settings-panel">
         <div className="settings-panel__header-row">
-          <h3 className="settings-panel__title">Settings</h3>
+          <h3 className="settings-panel__title">{`${ELEMENT_NAME_TYPE[selectedElement.type]} settings`}</h3>
           <Actions handleDuplicate={handleDuplicate} handleRemove={handleRemove} />
         </div>
         <FieldConfig selectedElement={selectedElement} updateElement={updateElement} />
