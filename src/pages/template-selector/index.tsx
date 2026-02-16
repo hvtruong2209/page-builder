@@ -1,4 +1,4 @@
-import TemplateSelector from "../../features/templates/TemplateSelector";
+import TemplateSelector from "../../features/templates";
 
 const TemplateSelectorPage = () => {
   return <TemplateSelector />;

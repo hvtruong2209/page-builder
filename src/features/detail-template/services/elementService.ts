@@ -31,7 +31,6 @@ export const updateElementDeep = (
         children: updateElementDeep(el.children, id, changes),
       };
     }
-
     return el;
   });
 };

@@ -40,21 +40,19 @@ export const BuilderProvider = ({
   const uiState = useMemo(
     () => ({
       selectedElementId: builderUI.selectedElementId,
-      showPreview: builderUI.showPreview,
       draft: builderUI.draft,
     }),
-    [builderUI.selectedElementId, builderUI.showPreview, builderUI.draft],
+    [builderUI.selectedElementId, builderUI.draft],
   );
 
   // Memoize stable actions
   const uiActions = useMemo(
     () => ({
       setSelectedElementId: builderUI.setSelectedElementId,
-      setShowPreview: builderUI.setShowPreview,
       setDraft: builderUI.setDraft,
       ...bridgeActions,
     }),
-    [builderUI.setSelectedElementId, builderUI.setShowPreview, builderUI.setDraft, bridgeActions],
+    [builderUI.setSelectedElementId, builderUI.setDraft, bridgeActions],
   );
 
   return (

@@ -1,7 +1,7 @@
-import "./TemplateSelector.css";
+import "./index.css";
 import { configTemplates } from "../../constants/template";
-import { TemplateMiniPreview } from "./components/TemplateMiniPreview";
 import { Link } from "react-router-dom";
+import { TemplateMiniPreview } from "./components/TemplateMiniPreview";
 
 const TemplateSelector = () => {
   return (

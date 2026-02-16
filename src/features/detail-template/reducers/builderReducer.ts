@@ -34,6 +34,7 @@ export type BuilderAction =
   | { type: typeof BUILDER_ACTION_TYPE.UNDO }
   | { type: typeof BUILDER_ACTION_TYPE.REDO };
 
+// Use immer (produce) to handle immutable state updates in the builder reducer
 export const builderReducer = produce((draft: Template, action: BuilderAction) => {
   switch (action.type) {
     case BUILDER_ACTION_TYPE.UPDATE_PAGE_SETTING: {

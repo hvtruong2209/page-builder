@@ -8,10 +8,8 @@ interface UseBridgeActionProps {
   dispatch: React.Dispatch<any>;
   builderUI: {
     selectedElementId: string | null;
-    showPreview: boolean;
     draft: Draft | null;
     setSelectedElementId: (id: string | null) => void;
-    setShowPreview: (show: boolean) => void;
     setDraft: (draft: Draft | null | ((prev: Draft | null) => Draft | null)) => void;
   };
 }

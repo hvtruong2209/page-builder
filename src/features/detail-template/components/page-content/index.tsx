@@ -20,7 +20,7 @@ export const PageContent = ({ isPreview }: { isPreview?: boolean }) => {
   return (
     <div className="builder__preview-pane" onClick={() => setSelectedElementId(null)}>
       <div
-        className={`page-preview ${layout === LAYOUT_OPTIONS.TWO_COLUMN ? "page-preview--two-column" : ""}`}
+        className={`page-content ${layout === LAYOUT_OPTIONS.TWO_COLUMN ? "page-content--two-column" : ""}`}
         style={{
           backgroundColor: pageSettingsDisplay.backgroundColor,
           maxWidth: `${pageSettingsDisplay.contentWidth}px`,
@@ -38,7 +38,7 @@ export const PageContent = ({ isPreview }: { isPreview?: boolean }) => {
 const Element = ({ el, isPreview }: { el: TemplateElement; isPreview?: boolean }) => {
   const { isSelected, displayEl, editingRef, handleClick, handleBlur, handleKeyDown } =
     usePageContent(el);
-  const cls = `page-preview__element ${isSelected ? "page-preview__element--selected" : ""}`;
+  const cls = `page-content__element ${isSelected ? "page-content__element--selected" : ""}`;
 
   if (displayEl.type === ELEMENT_TYPE.HEADING) {
     return (
@@ -112,12 +112,12 @@ const Element = ({ el, isPreview }: { el: TemplateElement; isPreview?: boolean }
     return (
       <div
         key={displayEl.id}
-        className="page-preview__element--image-wrap"
+        className="page-content__element--image-wrap"
         style={{ textAlign: displayEl.alignment, ...spacingStyle(displayEl) }}
         onClick={(e) => handleClick(e, displayEl.id)}
       >
         <div
-          className={`page-preview__image-inner ${isSelected ? "page-preview__element--selected" : ""}`}
+          className={`page-content__image-inner ${isSelected ? "page-content__element--selected" : ""}`}
           style={{ width: `${displayEl.width}%` }}
         >
           <img
@@ -136,7 +136,7 @@ const Element = ({ el, isPreview }: { el: TemplateElement; isPreview?: boolean }
     return (
       <div
         key={displayEl.id}
-        className={`page-preview__section ${isSelected ? "page-preview__section--selected" : ""}`}
+        className={`page-content__section ${isSelected ? "page-content__section--selected" : ""}`}
         style={{
           gap: `${section.gap}px`,
           backgroundColor: section.backgroundColor,

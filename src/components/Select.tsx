@@ -13,8 +13,8 @@ interface CommonSelectProps<T extends string> {
 export const CommonSelect = <T extends string>({
   value,
   options,
-  onChange,
   label,
+  onChange,
 }: CommonSelectProps<T>) => {
   return (
     <div className="common-field__group">
